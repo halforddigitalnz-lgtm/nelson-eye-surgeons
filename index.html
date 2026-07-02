@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nelson Eye Surgeons | Specialist Ophthalmologists, Nelson NZ</title>
+<meta name="description" content="Locally based specialist ophthalmologists providing independent surgical and medical eye care to the top of the South Island.">
+<link rel="icon" type="image/png" href="resources/brand%20assets/logo/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink: '#0A2540', abyss: '#06182B', brand: '#1B6FB3', sky2: '#7FB9E0',
+        crest: '#BFE0F4', mist: '#EEF3F8', tint: '#E2EBF3', paper: '#FBFCFD',
+        slate2: '#52647A', haze: '#8497A8',
+      },
+      fontFamily: {
+        display: ['Newsreader', 'Georgia', 'serif'],
+        body: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(10,37,64,.06), 0 8px 24px -8px rgba(10,37,64,.14)',
+        lift: '0 2px 4px rgba(10,37,64,.08), 0 16px 40px -12px rgba(27,111,179,.30)',
+        btn: '0 1px 2px rgba(10,37,64,.18), 0 6px 16px -4px rgba(27,111,179,.35)',
+      },
+    }
+  }
+}
+</script>
+<style type="text/tailwindcss">
+  html { scroll-behavior: smooth; }
+  body { @apply font-body text-slate2 bg-paper antialiased; }
+  h1,h2,h3 { @apply text-ink; }
+
+  /* grain */
+  .grain::before {
+    content: ""; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .eyebrow { @apply font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-brand; }
+
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full font-body text-sm font-semibold tracking-wide transition-[transform,box-shadow,background-color,color] duration-200 outline-none; }
+  .btn:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 3px; }
+  .btn-primary { @apply btn bg-brand text-white px-7 py-3.5 shadow-btn; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(10,37,64,.2), 0 12px 28px -6px rgba(27,111,179,.45); background-color: #175F9A; }
+  .btn-primary:active { transform: translateY(0) scale(.98); }
+  .btn-ghost { @apply btn text-brand px-7 py-3.5 ring-1 ring-inset ring-brand/25 bg-white/60; }
+  .btn-ghost:hover { transform: translateY(-2px); @apply bg-white ring-brand/50 shadow-card; }
+  .btn-ghost:active { transform: translateY(0) scale(.98); }
+  .btn-light { @apply btn bg-white text-ink px-7 py-3.5 shadow-btn; }
+  .btn-light:hover { transform: translateY(-2px); @apply text-brand; }
+  .btn-light:active { transform: translateY(0) scale(.98); }
+
+  .navlink { @apply relative font-body text-[13px] font-semibold uppercase tracking-[0.12em] text-ink/80 py-2 outline-none transition-colors duration-200; }
+  .navlink:hover, .navlink:focus-visible { @apply text-brand; }
+  .navlink::after { content:""; @apply absolute left-0 -bottom-0.5 h-[2px] w-full bg-brand origin-left transition-transform duration-300; transform: scaleX(0); }
+  .navlink:hover::after, .navlink:focus-visible::after, .navlink[aria-current="page"]::after { transform: scaleX(1); }
+  .navlink[aria-current="page"] { @apply text-brand; }
+
+  .submenu { @apply invisible opacity-0 translate-y-2 absolute left-1/2 top-full pt-4 z-50 transition-[opacity,transform,visibility] duration-200; transform: translate(-50%, 8px); }
+  .has-sub:hover .submenu, .has-sub:focus-within .submenu { @apply visible opacity-100; transform: translate(-50%, 0); }
+  .sublink { @apply block whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-medium text-slate2 outline-none transition-colors duration-150; }
+  .sublink:hover, .sublink:focus-visible { @apply bg-mist text-brand; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  .photo { @apply relative overflow-hidden; }
+  .photo img { @apply h-full w-full object-cover; }
+  .photo::after { content:""; @apply absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent; }
+  .photo .tintlayer { @apply absolute inset-0 bg-sky2/25 mix-blend-multiply; }
+
+  details.faq { @apply border-b border-tint; }
+  details.faq summary { @apply flex cursor-pointer list-none items-baseline justify-between gap-6 py-6 outline-none; }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary h3 { @apply font-display text-xl md:text-2xl font-medium tracking-tight transition-colors duration-200; }
+  details.faq summary:hover h3, details.faq summary:focus-visible h3 { @apply text-brand; }
+  details.faq summary:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 4px; border-radius: 4px; }
+  details.faq .faq-icon { @apply relative mt-1 h-6 w-6 shrink-0 rounded-full ring-1 ring-brand/30 text-brand transition-transform duration-300; }
+  details.faq .faq-icon::before, details.faq .faq-icon::after { content:""; position:absolute; left:50%; top:50%; background: currentColor; transition: transform .3s; }
+  details.faq .faq-icon::before { width:10px; height:2px; transform: translate(-50%,-50%); }
+  details.faq .faq-icon::after { width:2px; height:10px; transform: translate(-50%,-50%); }
+  details.faq[open] .faq-icon { transform: rotate(45deg); }
+  details.faq .faq-body { @apply pb-7 pr-10 leading-[1.75] max-w-3xl; }
+
+  .prose-p { @apply leading-[1.75]; }
+  .link-inline { @apply font-semibold text-brand underline decoration-sky2 decoration-2 underline-offset-4 outline-none transition-colors duration-150; }
+  .link-inline:hover, .link-inline:focus-visible { @apply text-ink decoration-brand; }
+
+  @keyframes irisBlink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.06); } }
+  .iris-blink { transform-box: fill-box; transform-origin: center; animation: irisBlink 7.5s ease-in-out infinite; }
+  @keyframes eyeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .eye-float { animation: eyeFloat 9s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    .iris-blink, .eye-float { animation: none; }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body class="grain">
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
+
+<header id="siteHeader" class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-paper/80 backdrop-blur-md transition-[box-shadow,border-color] duration-300">
+  <div class="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 md:px-8">
+    <a href="index.html" class="shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-md" aria-label="Nelson Eye Surgeons — Home">
+      <img src="resources/brand%20assets/logo/logo.png" alt="Nelson Eye Surgeons" class="h-11 w-auto md:h-12">
+    </a>
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Main">
+      
+      <a href="index.html" class="navlink" aria-current="page">Home</a>
+      <div class="has-sub relative">
+        <a href="our-team.html" class="navlink inline-flex items-center gap-1.5" >Our Team
+          <svg class="h-3 w-3 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="submenu">
+          <div class="rounded-2xl border border-tint bg-white p-2 shadow-lift">
+            <a href="dr-antony-suter.html" class="sublink">Dr Antony Suter</a><a href="dr-rob-jones.html" class="sublink">Dr Rob Jones</a><a href="fiona-suter.html" class="sublink">Fiona Suter</a><a href="mary-jane-mij-mcphie.html" class="sublink">Mary-Jane (Mij) McPhie</a>
+          </div>
+        </div>
+      </div>
+      <div class="has-sub relative">
+        <a href="services.html" class="navlink inline-flex items-center gap-1.5" >Our Services
+          <svg class="h-3 w-3 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="submenu">
+          <div class="rounded-2xl border border-tint bg-white p-2 shadow-lift">
+            <a href="consults.html" class="sublink">Consults</a><a href="cataract-and-other-surgeries.html" class="sublink">Cataract and Other Surgeries</a><a href="surgery-faqs.html" class="sublink">Surgery FAQs</a><a href="anaesthesia.html" class="sublink">Anaesthesia</a>
+          </div>
+        </div>
+      </div>
+      <a href="patient-info.html" class="navlink" >Patient Info</a>
+      <a href="news.html" class="navlink" >News</a>
+      <a href="contact.html" class="btn-primary !px-6 !py-2.5 text-[13px] uppercase tracking-[0.1em]">Contact</a>
+    </nav>
+    <button id="menuBtn" class="rounded-lg p-2 text-ink outline-none ring-brand focus-visible:ring-2 lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="mi-open" d="M4 7h16M4 12h16M4 17h16"/><path class="mi-close hidden" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav id="mobileNav" class="hidden border-t border-tint bg-paper px-5 pb-8 pt-4 lg:hidden" aria-label="Mobile">
+    
+    <a href="index.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Home</a>
+    <details class="border-b border-tint">
+      <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Our Team
+        <svg class="h-3.5 w-3.5 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pb-4 pl-4">
+        <a href="our-team.html" class="block py-2 text-sm font-semibold text-brand">Our Team — overview</a>
+        <a href="dr-antony-suter.html" class="block py-2 text-sm text-slate2">Dr Antony Suter</a><a href="dr-rob-jones.html" class="block py-2 text-sm text-slate2">Dr Rob Jones</a><a href="fiona-suter.html" class="block py-2 text-sm text-slate2">Fiona Suter</a><a href="mary-jane-mij-mcphie.html" class="block py-2 text-sm text-slate2">Mary-Jane (Mij) McPhie</a>
+      </div>
+    </details>
+    <details class="border-b border-tint">
+      <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Our Services
+        <svg class="h-3.5 w-3.5 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pb-4 pl-4">
+        <a href="services.html" class="block py-2 text-sm font-semibold text-brand">Our Services — overview</a>
+        <a href="consults.html" class="block py-2 text-sm text-slate2">Consults</a><a href="cataract-and-other-surgeries.html" class="block py-2 text-sm text-slate2">Cataract and Other Surgeries</a><a href="surgery-faqs.html" class="block py-2 text-sm text-slate2">Surgery FAQs</a><a href="anaesthesia.html" class="block py-2 text-sm text-slate2">Anaesthesia</a>
+      </div>
+    </details>
+    <a href="patient-info.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info</a>
+    <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">News</a>
+    <a href="contact.html" class="btn-primary mt-6 w-full">Contact</a>
+  </nav>
+</header>
+<main id="main">
+
+<section class="relative isolate overflow-hidden" style="background:
+  linear-gradient(180deg, rgba(255,255,255,0) 72%, #FFFFFF 100%),
+  radial-gradient(75% 110% at 85% 8%, rgba(191,224,244,.55), transparent 62%),
+  radial-gradient(55% 90% at 4% 100%, rgba(226,235,243,.9), transparent 55%),
+  radial-gradient(40% 60% at 55% 120%, rgba(127,185,224,.18), transparent 60%), #FBFCFD;">
+  <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 pt-36 md:px-8 md:pt-44 lg:grid-cols-[1.08fr,0.92fr] lg:gap-8 lg:pb-28">
+    <div>
+      <p class="eyebrow reveal">Nelson Eye Surgeons — Specialist Ophthalmologists</p>
+      <h1 class="reveal mt-5 font-display text-[2.6rem] font-medium leading-[1.06] tracking-[-0.03em] [text-wrap:balance] sm:text-6xl lg:text-[4.2rem]" style="transition-delay:.08s">Of the five senses, we agree that <em class="text-brand">your vision</em> is the most&nbsp;important.</h1>
+      <p class="reveal mt-7 max-w-xl text-lg leading-[1.7] md:text-xl" style="transition-delay:.16s">As your specialist ophthalmologists for the top of the South Island, you can trust us to look after it.</p>
+      <div class="reveal mt-10 flex flex-wrap items-center gap-4" style="transition-delay:.24s">
+        <a href="contact.html" class="btn-primary uppercase tracking-[0.12em]">Contact Us Today</a>
+        <a href="cataract-and-other-surgeries.html" class="btn-ghost">Cataract and Other Surgeries
+          <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:.2s">
+<div class="eye-float relative mx-auto w-[280px] sm:w-[360px] lg:w-[440px]" aria-hidden="true">
+  <div class="pointer-events-none absolute left-1/2 top-1/2 h-[136%] w-[136%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand/10"></div>
+  <div class="pointer-events-none absolute left-1/2 top-1/2 h-[172%] w-[172%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand/[0.06]"></div>
+  <svg id="heroEye" viewBox="0 0 240 240" class="relative block w-full drop-shadow-[0_24px_48px_rgba(27,111,179,0.25)]">
+    <defs>
+      <linearGradient id="ringGrad" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#233442"/>
+        <stop offset=".45" stop-color="#7488A0"/>
+        <stop offset=".78" stop-color="#D6E1EC"/>
+        <stop offset="1" stop-color="#D6E1EC" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="irisGrad" cx=".32" cy=".28" r="1.05">
+        <stop offset="0" stop-color="#BFE0F4"/>
+        <stop offset=".5" stop-color="#7FB9E0"/>
+        <stop offset="1" stop-color="#1B6FB3"/>
+      </radialGradient>
+      <radialGradient id="scleraGrad" cx=".5" cy=".42" r=".7">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset=".82" stop-color="#F1F6FB"/>
+        <stop offset="1" stop-color="#DCE9F4"/>
+      </radialGradient>
+    </defs>
+    <circle cx="120" cy="120" r="97" fill="url(#scleraGrad)"/>
+    <circle cx="120" cy="120" r="104" fill="none" stroke="url(#ringGrad)" stroke-width="7" stroke-linecap="round" transform="rotate(18 120 120)"/>
+    <g id="eyeIris" transform="translate(41,-41)">
+      <g class="iris-blink">
+        <ellipse cx="120" cy="120" rx="37" ry="39" fill="url(#irisGrad)" transform="rotate(-18 120 120)"/>
+        <ellipse cx="120" cy="120" rx="22" ry="26" fill="#0B1622" transform="rotate(-18 120 120)"/>
+        <circle cx="107" cy="105" r="7" fill="#fff" opacity=".95"/>
+        <circle cx="132" cy="134" r="3" fill="#fff" opacity=".4"/>
+      </g>
+    </g>
+  </svg>
+</div></div>
+  </div>
+</section>
+
+<section class="relative bg-white">
+  <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-2 lg:gap-20">
+    <div class="reveal order-2 lg:order-1">
+      
+<figure class="photo aspect-[4/3] rounded-3xl shadow-lift"><img src="resources/site-images/home-banner-fa884f94.jpg" alt="Jetty on Lake Rotoiti, Nelson Lakes" loading="lazy" class=""><span class="tintlayer" aria-hidden="true"></span></figure>
+    </div>
+    <div class="order-1 lg:order-2">
+      <p class="eyebrow reveal">Local, Independent Eye Care</p>
+      <h2 class="reveal mt-4 font-display text-3xl font-medium tracking-[-0.03em] md:text-[2.6rem] md:leading-[1.15]" style="transition-delay:.08s">Based in Nelson. Here before, during, and after&nbsp;surgery.</h2>
+      <p class="prose-p reveal mt-7" style="transition-delay:.14s">We are a locally based, friendly and professional team of highly qualified surgeons, nurses, ophthalmic technicians and optometrists providing independent surgical and medical eye care to the top of the South Island including Nelson, Richmond, Motueka, Golden Bay and Marlborough.</p>
+      <p class="prose-p reveal mt-5" style="transition-delay:.2s">Nelson Eye Surgeons believe that exceptional surgical outcomes rely on continuity of care, timely follow-up, and long-term local support - not simply a procedure. Because we are based in Nelson, we are uniquely positioned to provide comprehensive ophthalmic care within the community, before, during, and after surgery.</p>
+      <div class="reveal mt-9" style="transition-delay:.26s"><a href="our-team.html" class="btn-ghost">Our Specialists
+        <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-mist/70">
+  <div class="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <p class="eyebrow reveal">Our Services</p>
+        <h2 class="reveal mt-4 font-display text-3xl font-medium tracking-[-0.03em] md:text-[2.6rem]" style="transition-delay:.08s">From consultation to surgery,<br class="hidden md:block"> all under one roof.</h2>
+      </div>
+      <a href="services.html" class="btn-ghost reveal !bg-white" style="transition-delay:.16s">Our Services
+        <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      
+      <a href="consults.html" class="group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0s">
+        <img src="resources/site-images/consulting-eye-exam-new.jpeg" alt="Nelson Eye Surgeons Consults" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
+        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
+        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
+        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
+          <span class="font-display text-xl font-medium tracking-tight text-white">Consults</span>
+          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </span>
+      </a>
+      <a href="cataract-and-other-surgeries.html" class="group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.07s">
+        <img src="resources/site-images/consulting-2-new.jpeg" alt="Cataract and Other Surgeries" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
+        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
+        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
+        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
+          <span class="font-display text-xl font-medium tracking-tight text-white">Cataract and Other Surgeries</span>
+          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </span>
+      </a>
+      <a href="surgery-faqs.html" class="group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.14s">
+        <img src="resources/site-images/operating-2.jpeg" alt="Surgery FAQs" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
+        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
+        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
+        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
+          <span class="font-display text-xl font-medium tracking-tight text-white">Surgery FAQs</span>
+          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </span>
+      </a>
+      <a href="anaesthesia.html" class="group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.21000000000000002s">
+        <img src="resources/site-images/0b1a8587.jpg" alt="Anaesthesia" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
+        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
+        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
+        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
+          <span class="font-display text-xl font-medium tracking-tight text-white">Anaesthesia</span>
+          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
+            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
+    <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/dry-eye.pdf" target="_blank" rel="noopener" class="group reveal flex flex-col items-start justify-between gap-6 rounded-3xl bg-gradient-to-r from-tint via-mist to-paper p-8 shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand md:flex-row md:items-center md:p-12">
+      <div>
+        <h2 class="font-display text-3xl font-medium tracking-[-0.02em] md:text-4xl">SORE OR WATERY EYES?</h2>
+        <p class="prose-p mt-3 max-w-xl">Read and follow our helpful guidance, available to you for free.</p>
+      </div>
+      <span class="btn-primary shrink-0 uppercase tracking-[0.1em]">Dry &amp; Watery Eyes — PDF</span>
+    </a>
+  </div>
+</section>
+
+
+<section class="relative isolate overflow-hidden bg-ink" aria-labelledby="cta-title">
+  <div class="pointer-events-none absolute inset-0" style="background:
+    radial-gradient(55% 90% at 50% -10%, rgba(27,111,179,.4), transparent 65%),
+    radial-gradient(40% 60% at 90% 110%, rgba(127,185,224,.18), transparent 60%);"></div>
+  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
+  <div class="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
+    <h2 id="cta-title" class="!text-white">
+      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-medium tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
+      <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.1s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/70</span><span class="font-display text-2xl font-normal tracking-[0.18em] text-crest md:text-4xl">To See What You've</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
+      <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.2s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/40</span><span class="font-display text-base font-normal tracking-[0.42em] text-sky2 md:text-xl">Been Missing.</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
+    </h2>
+    <div class="reveal mt-14" style="transition-delay:.3s">
+      <a href="contact.html" class="btn-light uppercase tracking-[0.12em]">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="relative overflow-hidden bg-ink text-crest/80">
+  <div class="pointer-events-none absolute inset-0" style="background:
+    radial-gradient(60% 80% at 85% 0%, rgba(27,111,179,.25), transparent 60%),
+    radial-gradient(50% 70% at 10% 100%, rgba(6,24,43,.8), transparent 65%);"></div>
+  <div class="relative mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
+    <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
+      <div>
+        <img src="resources/brand%20assets/logo/logo-inversed.png" alt="Nelson Eye Surgeons" class="h-14 w-auto">
+        <p class="mt-6 text-sm leading-[1.9] text-crest/70">102 Franklyn Street<br>Nelson 7010<br>New Zealand</p>
+        <a href="resources/site-images/map.jpg" target="_blank" rel="noopener" class="link-inline mt-4 inline-block !text-sky2 text-sm !decoration-brand hover:!text-white">Map to Our Clinic</a>
+      </div>
+      <nav aria-label="Footer">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2">Menu</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          <li><a href="index.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Home</a></li><li><a href="our-team.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Team</a></li><li><a href="services.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Services</a></li><li><a href="patient-info.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Patient Info</a></li><li><a href="news.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">News</a></li><li><a href="contact.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Contact</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Services">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2">Our Services</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          <li><a href="consults.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Consults</a></li><li><a href="cataract-and-other-surgeries.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Cataract and Other Surgeries</a></li><li><a href="surgery-faqs.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Surgery FAQs</a></li><li><a href="anaesthesia.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Anaesthesia</a></li>
+        </ul>
+      </nav>
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2">Contact</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          <li><a href="mailto:info@eyenz.com?subject=Enquiry%20via%20website" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Email - info@eyenz.com</a></li>
+          <li><a href="tel:035457900" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">03 545 7900</a></li>
+        </ul>
+        <a href="contact.html" class="btn-light mt-7 !px-6 !py-3 text-[12px] uppercase tracking-[0.1em]">Contact Us Today</a>
+      </div>
+    </div>
+    <div class="mt-14 border-t border-white/10 pt-7 text-xs text-crest/50">© Copyright 2026 Nelson Eye Surgeons.</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // header shadow
+  const hdr = document.getElementById('siteHeader');
+  const onScroll = () => hdr.classList.toggle('shadow-card', window.scrollY > 8) ||
+                        hdr.classList.toggle('border-tint', window.scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // mobile menu
+  const btn = document.getElementById('menuBtn'), nav = document.getElementById('mobileNav');
+  btn?.addEventListener('click', () => {
+    const open = nav.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open);
+    btn.querySelector('.mi-open').classList.toggle('hidden', open);
+    btn.querySelector('.mi-close').classList.toggle('hidden', !open);
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => reduced ? el.classList.add('in') : io.observe(el));
+
+  // cursor-following eye
+  const eye = document.getElementById('heroEye');
+  const iris = document.getElementById('eyeIris');
+  if (eye && iris && !reduced) {
+    const HOME = { x: 41, y: -41 };   // logo pose (top-right)
+    const MAX = 58;                    // how far the iris may wander (viewBox units)
+    let target = { ...HOME }, pos = { ...HOME }, idleTimer = null, raf = null;
+    const tick = () => {
+      pos.x += (target.x - pos.x) * .09;
+      pos.y += (target.y - pos.y) * .09;
+      iris.setAttribute('transform', `translate(${pos.x.toFixed(2)},${pos.y.toFixed(2)})`);
+      if (Math.abs(target.x - pos.x) + Math.abs(target.y - pos.y) > .05) raf = requestAnimationFrame(tick);
+      else raf = null;
+    };
+    const setTarget = (x, y) => { target = { x, y }; if (!raf) raf = requestAnimationFrame(tick); };
+    addEventListener('pointermove', e => {
+      const r = eye.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      let dx = e.clientX - cx, dy = e.clientY - cy;
+      const d = Math.hypot(dx, dy) || 1;
+      const k = Math.min(1, d / 340) * MAX / d;
+      setTarget(dx * k, dy * k);
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => setTarget(HOME.x, HOME.y), 2600);
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>
