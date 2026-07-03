@@ -72,6 +72,8 @@ tailwind.config = {
   .reveal.in { opacity: 1; transform: none; }
 
   .photo { @apply relative overflow-hidden; }
+  .parallax-img { transform: scale(1.18); will-change: transform; }
+  @media (prefers-reduced-motion: reduce) { .parallax-img { transform: none !important; } }
   .photo img { @apply h-full w-full object-cover; }
   .photo::after { content:""; @apply absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent; }
   .photo .tintlayer { @apply absolute inset-0 bg-sky2/25 mix-blend-multiply; }
@@ -276,6 +278,21 @@ tailwind.config = {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => reduced ? el.classList.add('in') : io.observe(el));
+
+  // scroll parallax on tagged photos
+  const pImgs = [...document.querySelectorAll('[data-parallax] .parallax-img')];
+  if (pImgs.length && !reduced) {
+    const update = () => pImgs.forEach(img => {
+      const r = img.parentElement.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const progress = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      const y = Math.max(-1, Math.min(1, progress)) * -32;
+      img.style.transform = `scale(1.18) translateY(${y.toFixed(1)}px)`;
+    });
+    addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    addEventListener('resize', update, { passive: true });
+    update();
+  }
 
   // cursor-following eye
   const eye = document.getElementById('heroEye');
