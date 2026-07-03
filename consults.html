@@ -72,7 +72,7 @@ tailwind.config = {
   .reveal.in { opacity: 1; transform: none; }
 
   .photo { @apply relative overflow-hidden; }
-  .parallax-img { transform: scale(1.18); will-change: transform; }
+  .parallax-img { transform: scale(1.35); will-change: transform; }
   @media (prefers-reduced-motion: reduce) { .parallax-img { transform: none !important; } }
   .photo img { @apply h-full w-full object-cover; }
   .photo::after { content:""; @apply absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent; }
@@ -374,8 +374,9 @@ tailwind.config = {
       const r = img.parentElement.getBoundingClientRect();
       if (r.bottom < 0 || r.top > innerHeight) return;
       const progress = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
-      const y = Math.max(-1, Math.min(1, progress)) * -32;
-      img.style.transform = `scale(1.18) translateY(${y.toFixed(1)}px)`;
+      const y = Math.max(-64, Math.min(64, progress * -110));
+      const s = 1.35 - Math.min(Math.abs(progress), 0.5) * 0.12;
+      img.style.transform = `scale(${s.toFixed(3)}) translateY(${y.toFixed(1)}px)`;
     });
     addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
     addEventListener('resize', update, { passive: true });
