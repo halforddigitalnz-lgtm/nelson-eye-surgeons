@@ -72,6 +72,8 @@ tailwind.config = {
   .reveal.in { opacity: 1; transform: none; }
 
   .photo { @apply relative overflow-hidden; }
+  /* keep rounded corners clipping composited (transformed) children on hover */
+  .photo, .clipfix { isolation: isolate; -webkit-mask-image: -webkit-radial-gradient(#fff, #000); }
   .parallax-img { transform: scale(1.35); will-change: transform; }
   @media (prefers-reduced-motion: reduce) { .parallax-img { transform: none !important; } }
   .photo img { @apply h-full w-full object-cover; }
@@ -190,7 +192,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
     <div class="grid gap-8 md:grid-cols-2">
       
-      <a href="consults.html" class="group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0s">
+      <a href="consults.html" class="clipfix group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0s">
         <img src="resources/site-images/consulting-eye-exam-new.jpeg" alt="Nelson Eye Surgeons Consults" loading="lazy" class="aspect-[16/10] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04]">
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/20 to-transparent" aria-hidden="true"></span>
@@ -201,7 +203,7 @@ tailwind.config = {
           </span>
         </span>
       </a>
-      <a href="cataract-and-other-surgeries.html" class="group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.07s">
+      <a href="cataract-and-other-surgeries.html" class="clipfix group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.07s">
         <img src="resources/site-images/consulting-2-new.jpeg" alt="ophthalmologists nelson eye surgeons" loading="lazy" class="aspect-[16/10] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04]">
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/20 to-transparent" aria-hidden="true"></span>
@@ -212,7 +214,7 @@ tailwind.config = {
           </span>
         </span>
       </a>
-      <a href="surgery-faqs.html" class="group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.14s">
+      <a href="surgery-faqs.html" class="clipfix group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.14s">
         <img src="resources/site-images/operating-2.jpeg" alt="Surgery FAQs" loading="lazy" class="aspect-[16/10] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04]">
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/20 to-transparent" aria-hidden="true"></span>
@@ -223,7 +225,7 @@ tailwind.config = {
           </span>
         </span>
       </a>
-      <a href="anaesthesia.html" class="group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.21000000000000002s">
+      <a href="anaesthesia.html" class="clipfix group reveal relative block overflow-hidden rounded-3xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.21000000000000002s">
         <img src="resources/site-images/0b1a8587.jpg" alt="Anaesthesia" loading="lazy" class="aspect-[16/10] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04]">
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/20 to-transparent" aria-hidden="true"></span>

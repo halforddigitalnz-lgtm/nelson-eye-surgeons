@@ -72,6 +72,8 @@ tailwind.config = {
   .reveal.in { opacity: 1; transform: none; }
 
   .photo { @apply relative overflow-hidden; }
+  /* keep rounded corners clipping composited (transformed) children on hover */
+  .photo, .clipfix { isolation: isolate; -webkit-mask-image: -webkit-radial-gradient(#fff, #000); }
   .parallax-img { transform: scale(1.35); will-change: transform; }
   @media (prefers-reduced-motion: reduce) { .parallax-img { transform: none !important; } }
   .photo img { @apply h-full w-full object-cover; }

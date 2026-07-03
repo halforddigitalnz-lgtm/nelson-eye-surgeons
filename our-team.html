@@ -72,6 +72,8 @@ tailwind.config = {
   .reveal.in { opacity: 1; transform: none; }
 
   .photo { @apply relative overflow-hidden; }
+  /* keep rounded corners clipping composited (transformed) children on hover */
+  .photo, .clipfix { isolation: isolate; -webkit-mask-image: -webkit-radial-gradient(#fff, #000); }
   .parallax-img { transform: scale(1.35); will-change: transform; }
   @media (prefers-reduced-motion: reduce) { .parallax-img { transform: none !important; } }
   .photo img { @apply h-full w-full object-cover; }
@@ -190,7 +192,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
     <div class="grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
       
-      <a href="dr-antony-suter.html" class="group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0s">
+      <a href="dr-antony-suter.html" class="clipfix group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0s">
         <span class="photo block aspect-[4/4.6]"><img src="resources/site-images/our-team-gallery-011e40b2.jpg" alt="Dr Antony Suter" loading="lazy" class="transition-transform duration-500 group-hover:scale-[1.04]"><span class="tintlayer" aria-hidden="true"></span></span>
         <span class="block p-6">
           <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Dr Antony Suter</span>
@@ -198,7 +200,7 @@ tailwind.config = {
           <span class="link-inline mt-4 inline-block text-sm">Read more here</span>
         </span>
       </a>
-      <a href="dr-rob-jones.html" class="group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.07s">
+      <a href="dr-rob-jones.html" class="clipfix group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.07s">
         <span class="photo block aspect-[4/4.6]"><img src="resources/site-images/our-team-gallery-1a733cf4.jpg" alt="Dr Rob Jones" loading="lazy" class="transition-transform duration-500 group-hover:scale-[1.04]"><span class="tintlayer" aria-hidden="true"></span></span>
         <span class="block p-6">
           <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Dr Rob Jones</span>
@@ -206,7 +208,7 @@ tailwind.config = {
           <span class="link-inline mt-4 inline-block text-sm">Read more here</span>
         </span>
       </a>
-      <a href="fiona-suter.html" class="group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.14s">
+      <a href="fiona-suter.html" class="clipfix group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.14s">
         <span class="photo block aspect-[4/4.6]"><img src="resources/site-images/our-team-gallery-35f3b7d8.jpg" alt="Fiona Suter" loading="lazy" class="transition-transform duration-500 group-hover:scale-[1.04]"><span class="tintlayer" aria-hidden="true"></span></span>
         <span class="block p-6">
           <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Fiona Suter</span>
@@ -214,7 +216,7 @@ tailwind.config = {
           <span class="link-inline mt-4 inline-block text-sm">Read more here</span>
         </span>
       </a>
-      <a href="mary-jane-mij-mcphie.html" class="group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.21000000000000002s">
+      <a href="mary-jane-mij-mcphie.html" class="clipfix group reveal block overflow-hidden rounded-3xl bg-white shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.21000000000000002s">
         <span class="photo block aspect-[4/4.6]"><img src="resources/site-images/our-team-gallery-da3d0cdf.jpg" alt="Mary-Jane (Mij) McPhie" loading="lazy" class="transition-transform duration-500 group-hover:scale-[1.04]"><span class="tintlayer" aria-hidden="true"></span></span>
         <span class="block p-6">
           <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Mary-Jane (Mij) McPhie</span>
