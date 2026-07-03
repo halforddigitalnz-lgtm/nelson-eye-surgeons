@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="resources/brand%20assets/logo/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -20,8 +20,8 @@ tailwind.config = {
         slate2: '#52647A', haze: '#8497A8',
       },
       fontFamily: {
-        display: ['Newsreader', 'Georgia', 'serif'],
-        body: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['Urbanist', 'system-ui', 'sans-serif'],
+        body: ['Urbanist', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         card: '0 1px 2px rgba(10,37,64,.06), 0 8px 24px -8px rgba(10,37,64,.14)',
@@ -81,7 +81,7 @@ tailwind.config = {
   details.faq { @apply border-b border-tint; }
   details.faq summary { @apply flex cursor-pointer list-none items-baseline justify-between gap-6 py-6 outline-none; }
   details.faq summary::-webkit-details-marker { display: none; }
-  details.faq summary h3 { @apply font-display text-xl md:text-2xl font-medium tracking-tight transition-colors duration-200; }
+  details.faq summary h3 { @apply font-display text-xl md:text-2xl font-semibold tracking-tight transition-colors duration-200; }
   details.faq summary:hover h3, details.faq summary:focus-visible h3 { @apply text-brand; }
   details.faq summary:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 4px; border-radius: 4px; }
   details.faq .faq-icon { @apply relative mt-1 h-6 w-6 shrink-0 rounded-full ring-1 ring-brand/30 text-brand transition-transform duration-300; }
@@ -182,7 +182,7 @@ tailwind.config = {
   <div class="absolute inset-0 bg-gradient-to-r from-abyss/90 via-ink/55 to-ink/10" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
     <p class="eyebrow !text-sky2">Helpful Guidance, Free to Download</p>
-    <h1 class="mt-4 max-w-3xl font-display text-4xl font-medium tracking-[-0.03em] !text-white md:text-6xl">Patient Information</h1>
+    <h1 class="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-[-0.03em] !text-white md:text-6xl">Patient Information</h1>
     
   </div>
 </section>
@@ -192,7 +192,7 @@ tailwind.config = {
       
       <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/cataract-info-sheet.pdf" target="_blank" rel="noopener" class="group reveal flex items-center justify-between gap-5 rounded-2xl bg-white p-7 shadow-card ring-1 ring-tint outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0s">
         <span>
-          <span class="block font-display text-2xl font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Cataract Surgery</span>
+          <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Cataract Surgery</span>
           <span class="mt-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-haze">PDF information sheet</span>
         </span>
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-mist text-brand transition-[transform,background-color] duration-300 group-hover:translate-y-1 group-hover:bg-crest">
@@ -201,7 +201,7 @@ tailwind.config = {
       </a>
       <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/dry-eye.pdf" target="_blank" rel="noopener" class="group reveal flex items-center justify-between gap-5 rounded-2xl bg-white p-7 shadow-card ring-1 ring-tint outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.05s">
         <span>
-          <span class="block font-display text-2xl font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Dry & Watery Eyes</span>
+          <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Dry & Watery Eyes</span>
           <span class="mt-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-haze">PDF information sheet</span>
         </span>
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-mist text-brand transition-[transform,background-color] duration-300 group-hover:translate-y-1 group-hover:bg-crest">
@@ -210,7 +210,7 @@ tailwind.config = {
       </a>
       <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/eyelid.pdf" target="_blank" rel="noopener" class="group reveal flex items-center justify-between gap-5 rounded-2xl bg-white p-7 shadow-card ring-1 ring-tint outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.1s">
         <span>
-          <span class="block font-display text-2xl font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Eyelid Surgery</span>
+          <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Eyelid Surgery</span>
           <span class="mt-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-haze">PDF information sheet</span>
         </span>
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-mist text-brand transition-[transform,background-color] duration-300 group-hover:translate-y-1 group-hover:bg-crest">
@@ -219,7 +219,7 @@ tailwind.config = {
       </a>
       <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/glaucoma.pdf" target="_blank" rel="noopener" class="group reveal flex items-center justify-between gap-5 rounded-2xl bg-white p-7 shadow-card ring-1 ring-tint outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.15000000000000002s">
         <span>
-          <span class="block font-display text-2xl font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Glaucoma & Treatment</span>
+          <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Glaucoma & Treatment</span>
           <span class="mt-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-haze">PDF information sheet</span>
         </span>
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-mist text-brand transition-[transform,background-color] duration-300 group-hover:translate-y-1 group-hover:bg-crest">
@@ -228,7 +228,7 @@ tailwind.config = {
       </a>
       <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/pterygium.pdf" target="_blank" rel="noopener" class="group reveal flex items-center justify-between gap-5 rounded-2xl bg-white p-7 shadow-card ring-1 ring-tint outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.2s">
         <span>
-          <span class="block font-display text-2xl font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Pterygium Surgery</span>
+          <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Pterygium Surgery</span>
           <span class="mt-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-haze">PDF information sheet</span>
         </span>
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-mist text-brand transition-[transform,background-color] duration-300 group-hover:translate-y-1 group-hover:bg-crest">
@@ -237,7 +237,7 @@ tailwind.config = {
       </a>
       <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/squit-surgery.pdf" target="_blank" rel="noopener" class="group reveal flex items-center justify-between gap-5 rounded-2xl bg-white p-7 shadow-card ring-1 ring-tint outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand" style="transition-delay:0.25s">
         <span>
-          <span class="block font-display text-2xl font-medium tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Squint Surgery</span>
+          <span class="block font-display text-2xl font-semibold tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">Squint Surgery</span>
           <span class="mt-1.5 block text-xs font-semibold uppercase tracking-[0.14em] text-haze">PDF information sheet</span>
         </span>
         <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-mist text-brand transition-[transform,background-color] duration-300 group-hover:translate-y-1 group-hover:bg-crest">
@@ -256,7 +256,7 @@ tailwind.config = {
   <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
     <h2 id="cta-title" class="!text-white">
-      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-medium tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
+      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-semibold tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
       <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.1s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/70</span><span class="font-display text-2xl font-normal tracking-[0.18em] text-crest md:text-4xl">To See What You've</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
       <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.2s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/40</span><span class="font-display text-base font-normal tracking-[0.42em] text-sky2 md:text-xl">Been Missing.</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
     </h2>
@@ -274,7 +274,7 @@ tailwind.config = {
   <div class="relative mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
-        <p class="font-display text-2xl font-medium tracking-tight text-white">Nelson Eye Surgeons</p>
+        <p class="font-display text-2xl font-semibold tracking-tight text-white">Nelson Eye Surgeons</p>
         <p class="mt-5 text-sm leading-[1.9] text-crest/70">102 Franklyn Street<br>Nelson 7010<br>New Zealand</p>
         <a href="map.html" class="link-inline mt-4 inline-block !text-sky2 text-sm !decoration-brand hover:!text-white">Map to Our Clinic</a>
       </div>

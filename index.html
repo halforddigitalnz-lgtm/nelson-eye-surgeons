@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="resources/brand%20assets/logo/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -20,8 +20,8 @@ tailwind.config = {
         slate2: '#52647A', haze: '#8497A8',
       },
       fontFamily: {
-        display: ['Newsreader', 'Georgia', 'serif'],
-        body: ['"Hanken Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['Urbanist', 'system-ui', 'sans-serif'],
+        body: ['Urbanist', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         card: '0 1px 2px rgba(10,37,64,.06), 0 8px 24px -8px rgba(10,37,64,.14)',
@@ -81,7 +81,7 @@ tailwind.config = {
   details.faq { @apply border-b border-tint; }
   details.faq summary { @apply flex cursor-pointer list-none items-baseline justify-between gap-6 py-6 outline-none; }
   details.faq summary::-webkit-details-marker { display: none; }
-  details.faq summary h3 { @apply font-display text-xl md:text-2xl font-medium tracking-tight transition-colors duration-200; }
+  details.faq summary h3 { @apply font-display text-xl md:text-2xl font-semibold tracking-tight transition-colors duration-200; }
   details.faq summary:hover h3, details.faq summary:focus-visible h3 { @apply text-brand; }
   details.faq summary:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 4px; border-radius: 4px; }
   details.faq .faq-icon { @apply relative mt-1 h-6 w-6 shrink-0 rounded-full ring-1 ring-brand/30 text-brand transition-transform duration-300; }
@@ -240,7 +240,7 @@ tailwind.config = {
     </div>
     <div class="order-1 lg:order-2">
       <p class="eyebrow reveal">Local, Independent Eye Care</p>
-      <h2 class="reveal mt-4 font-display text-3xl font-medium tracking-[-0.03em] md:text-[2.6rem] md:leading-[1.15]" style="transition-delay:.08s">Based in Nelson. Here before, during, and after&nbsp;surgery.</h2>
+      <h2 class="reveal mt-4 font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.6rem] md:leading-[1.15]" style="transition-delay:.08s">Based in Nelson. Here before, during, and after&nbsp;surgery.</h2>
       <p class="prose-p reveal mt-7" style="transition-delay:.14s">We are a locally based, friendly and professional team of highly qualified surgeons, nurses, ophthalmic technicians and optometrists providing independent surgical and medical eye care to the top of the South Island including Nelson, Richmond, Motueka, Golden Bay and Marlborough.</p>
       <p class="prose-p reveal mt-5" style="transition-delay:.2s">Nelson Eye Surgeons believe that exceptional surgical outcomes rely on continuity of care, timely follow-up, and long-term local support - not simply a procedure. Because we are based in Nelson, we are uniquely positioned to provide comprehensive ophthalmic care within the community, before, during, and after surgery.</p>
       <div class="reveal mt-9" style="transition-delay:.26s"><a href="our-team.html" class="btn-ghost">Our Specialists
@@ -255,7 +255,7 @@ tailwind.config = {
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div>
         <p class="eyebrow reveal">Our Services</p>
-        <h2 class="reveal mt-4 font-display text-3xl font-medium tracking-[-0.03em] md:text-[2.6rem]" style="transition-delay:.08s">From consultation to surgery,<br class="hidden md:block"> all under one roof.</h2>
+        <h2 class="reveal mt-4 font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.6rem]" style="transition-delay:.08s">From consultation to surgery,<br class="hidden md:block"> all under one roof.</h2>
       </div>
       <a href="services.html" class="btn-ghost reveal !bg-white" style="transition-delay:.16s">Our Services
         <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -267,7 +267,7 @@ tailwind.config = {
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
         <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-medium tracking-tight text-white">Consults</span>
+          <span class="font-display text-xl font-semibold tracking-tight text-white">Consults</span>
           <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
             <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -278,7 +278,7 @@ tailwind.config = {
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
         <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-medium tracking-tight text-white">Cataract and Other Surgeries</span>
+          <span class="font-display text-xl font-semibold tracking-tight text-white">Cataract and Other Surgeries</span>
           <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
             <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -289,7 +289,7 @@ tailwind.config = {
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
         <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-medium tracking-tight text-white">Surgery FAQs</span>
+          <span class="font-display text-xl font-semibold tracking-tight text-white">Surgery FAQs</span>
           <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
             <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -300,7 +300,7 @@ tailwind.config = {
         <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
         <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
         <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-medium tracking-tight text-white">Anaesthesia</span>
+          <span class="font-display text-xl font-semibold tracking-tight text-white">Anaesthesia</span>
           <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
             <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
@@ -314,7 +314,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
     <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/dry-eye.pdf" target="_blank" rel="noopener" class="group reveal flex flex-col items-start justify-between gap-6 rounded-3xl bg-gradient-to-r from-tint via-mist to-paper p-8 shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand md:flex-row md:items-center md:p-12">
       <div>
-        <h2 class="font-display text-3xl font-medium tracking-[-0.02em] md:text-4xl">Sore or watery eyes?</h2>
+        <h2 class="font-display text-3xl font-semibold tracking-[-0.02em] md:text-4xl">Sore or watery eyes?</h2>
         <p class="prose-p mt-3 max-w-xl">Read and follow our helpful guidance, available to you for free.</p>
       </div>
       <span class="btn-primary shrink-0 uppercase tracking-[0.1em]">Dry &amp; Watery Eyes — PDF</span>
@@ -331,7 +331,7 @@ tailwind.config = {
   <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
     <h2 id="cta-title" class="!text-white">
-      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-medium tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
+      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-semibold tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
       <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.1s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/70</span><span class="font-display text-2xl font-normal tracking-[0.18em] text-crest md:text-4xl">To See What You've</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
       <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.2s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/40</span><span class="font-display text-base font-normal tracking-[0.42em] text-sky2 md:text-xl">Been Missing.</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
     </h2>
@@ -349,7 +349,7 @@ tailwind.config = {
   <div class="relative mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
-        <p class="font-display text-2xl font-medium tracking-tight text-white">Nelson Eye Surgeons</p>
+        <p class="font-display text-2xl font-semibold tracking-tight text-white">Nelson Eye Surgeons</p>
         <p class="mt-5 text-sm leading-[1.9] text-crest/70">102 Franklyn Street<br>Nelson 7010<br>New Zealand</p>
         <a href="map.html" class="link-inline mt-4 inline-block !text-sky2 text-sm !decoration-brand hover:!text-white">Map to Our Clinic</a>
       </div>
