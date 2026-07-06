@@ -97,14 +97,16 @@ tailwind.config = {
   .link-inline { @apply font-semibold text-brand underline decoration-sky2 decoration-2 underline-offset-4 outline-none transition-colors duration-150; }
   .link-inline:hover, .link-inline:focus-visible { @apply text-ink decoration-brand; }
 
-  @keyframes irisBlink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.06); } }
-  .iris-blink { transform-box: fill-box; transform-origin: center; animation: irisBlink 7.5s ease-in-out infinite; }
-  @keyframes eyeFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  .eye-float { animation: eyeFloat 9s ease-in-out infinite; }
+  /* blur-to-sharp headline: loads out of focus, resolves crisp — plays once */
+  @keyframes blurIn {
+    from { filter: blur(14px); opacity: .25; }
+    to { filter: blur(0); opacity: 1; }
+  }
+  .blur-in { animation: blurIn 1.1s cubic-bezier(.25,.6,.25,1) .15s both; }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
-    .iris-blink, .eye-float { animation: none; }
+    .blur-in { animation: none; filter: none; opacity: 1; }
     html { scroll-behavior: auto; }
     *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
   }
@@ -334,32 +336,6 @@ tailwind.config = {
     update();
   }
 
-  // cursor-following eye
-  const eye = document.getElementById('heroEye');
-  const iris = document.getElementById('eyeIris');
-  if (eye && iris && !reduced) {
-    const HOME = { x: 41, y: -41 };   // logo pose (top-right)
-    const MAX = 58;                    // how far the iris may wander (viewBox units)
-    let target = { ...HOME }, pos = { ...HOME }, idleTimer = null, raf = null;
-    const tick = () => {
-      pos.x += (target.x - pos.x) * .09;
-      pos.y += (target.y - pos.y) * .09;
-      iris.setAttribute('transform', `translate(${pos.x.toFixed(2)},${pos.y.toFixed(2)})`);
-      if (Math.abs(target.x - pos.x) + Math.abs(target.y - pos.y) > .05) raf = requestAnimationFrame(tick);
-      else raf = null;
-    };
-    const setTarget = (x, y) => { target = { x, y }; if (!raf) raf = requestAnimationFrame(tick); };
-    addEventListener('pointermove', e => {
-      const r = eye.getBoundingClientRect();
-      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-      let dx = e.clientX - cx, dy = e.clientY - cy;
-      const d = Math.hypot(dx, dy) || 1;
-      const k = Math.min(1, d / 340) * MAX / d;
-      setTarget(dx * k, dy * k);
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => setTarget(HOME.x, HOME.y), 2600);
-    }, { passive: true });
-  }
 })();
 </script>
 </body>
