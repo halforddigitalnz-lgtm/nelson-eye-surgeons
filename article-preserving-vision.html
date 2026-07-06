@@ -290,7 +290,7 @@ tailwind.config = {
       const progress = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
       const y = Math.max(-24, Math.min(24, progress * -42));
       // blurred as it enters from below, sharpening as it rises to centre
-      const blur = Math.max(0, Math.min(6, (progress - 0.05) * 11));
+      const blur = Math.max(0, Math.min(6, (progress - 0.32) * 16));
       img.style.transform = `scale(1.12) translateY(${y.toFixed(1)}px)`;
       img.style.filter = blur < 0.05 ? 'none' : `blur(${blur.toFixed(2)}px)`;
     });
