@@ -93,6 +93,17 @@ tailwind.config = {
   details.faq[open] .faq-icon { transform: rotate(45deg); }
   details.faq .faq-body { @apply pb-7 pr-10 leading-[1.75] max-w-3xl; }
 
+  /* surgery information index rows */
+  .surgery-row { @apply flex items-center justify-between gap-5 rounded-2xl bg-white px-7 py-6 shadow-card ring-1 ring-inset ring-tint outline-none transition-[transform,box-shadow] duration-300; }
+  .surgery-row:hover, .surgery-row:focus-visible { transform: translateY(-3px); @apply shadow-lift ring-brand/40; }
+  .surgery-row:active { transform: translateY(0) scale(.995); }
+  .surgery-row:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 3px; }
+  .surgery-row .sr-title { @apply block font-display text-lg font-semibold leading-tight tracking-[-0.01em] text-ink transition-colors duration-200 md:text-xl; }
+  .surgery-row:hover .sr-title, .surgery-row:focus-visible .sr-title { @apply text-brand; }
+  .surgery-row .sr-desc { @apply mt-2 block text-sm leading-[1.6]; }
+  .surgery-row .sr-arrow { @apply grid h-9 w-9 shrink-0 place-items-center rounded-full bg-mist text-brand transition-transform duration-300; }
+  .surgery-row:hover .sr-arrow, .surgery-row:focus-visible .sr-arrow { transform: translateX(4px); }
+
   .prose-p { @apply leading-[1.75]; }
   .link-inline { @apply font-semibold text-brand underline decoration-sky2 decoration-2 underline-offset-4 outline-none transition-colors duration-150; }
   .link-inline:hover, .link-inline:focus-visible { @apply text-ink decoration-brand; }
@@ -143,7 +154,16 @@ tailwind.config = {
           </div>
         </div>
       </div>
-      <a href="patient-info.html" class="navlink" >Patient Info</a>
+      <div class="has-sub relative">
+        <a href="patient-info.html" class="navlink inline-flex items-center gap-1.5" >Patient Info
+          <svg class="h-3 w-3 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="submenu">
+          <div class="rounded-2xl border border-tint bg-white p-2 shadow-lift">
+            <a href="cataract-and-refractive-lens-exchange.html" class="sublink">Cataract Surgery</a><a href="cataract-and-refractive-lens-exchange.html" class="sublink">Refractive Lens Exchange</a><a href="intraocular-lens-options.html" class="sublink">Intraocular Lens Options</a><a href="pterygium-surgery.html" class="sublink">Pterygium Surgery</a><a href="oculoplastic-surgery.html" class="sublink">Oculoplastic Surgery</a><a href="glaucoma-surgery.html" class="sublink">Glaucoma Surgery</a>
+          </div>
+        </div>
+      </div>
       <a href="news.html" class="navlink" >News</a>
       <a href="contact.html" class="btn-primary !px-6 !py-2.5 text-[13px] uppercase tracking-[0.1em]">Contact</a>
     </nav>
@@ -172,7 +192,15 @@ tailwind.config = {
         <a href="consults.html" class="block py-2 text-sm text-slate2">Consults</a><a href="cataract-and-other-surgeries.html" class="block py-2 text-sm text-slate2">Cataract and Other Surgeries</a><a href="surgery-faqs.html" class="block py-2 text-sm text-slate2">Surgery FAQs</a><a href="anaesthesia.html" class="block py-2 text-sm text-slate2">Anaesthesia</a>
       </div>
     </details>
-    <a href="patient-info.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info</a>
+    <details class="border-b border-tint">
+      <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info
+        <svg class="h-3.5 w-3.5 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pb-4 pl-4">
+        <a href="patient-info.html" class="block py-2 text-sm font-semibold text-brand">Patient Info — overview</a>
+        <a href="cataract-and-refractive-lens-exchange.html" class="block py-2 text-sm text-slate2">Cataract Surgery</a><a href="cataract-and-refractive-lens-exchange.html" class="block py-2 text-sm text-slate2">Refractive Lens Exchange</a><a href="intraocular-lens-options.html" class="block py-2 text-sm text-slate2">Intraocular Lens Options</a><a href="pterygium-surgery.html" class="block py-2 text-sm text-slate2">Pterygium Surgery</a><a href="oculoplastic-surgery.html" class="block py-2 text-sm text-slate2">Oculoplastic Surgery</a><a href="glaucoma-surgery.html" class="block py-2 text-sm text-slate2">Glaucoma Surgery</a>
+      </div>
+    </details>
     <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">News</a>
     <a href="contact.html" class="btn-primary mt-6 w-full">Contact</a>
   </nav>
@@ -242,6 +270,39 @@ tailwind.config = {
   </div>
 </section>
 
+<section id="surgery-information" class="scroll-mt-24 bg-mist/70">
+  <div class="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
+    <p class="eyebrow reveal">Surgery Information</p>
+    <h2 class="reveal mt-4 max-w-3xl font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.6rem] md:leading-[1.15]" style="transition-delay:.08s">The procedures we perform, explained.</h2>
+    <div class="mt-12 grid gap-4 md:grid-cols-2 md:gap-5">
+      <a href="cataract-and-refractive-lens-exchange.html" class="surgery-row reveal group" style="transition-delay:0s">
+        <span><span class="sr-title">Cataract Surgery &amp; Refractive Lens Exchange</span><span class="sr-desc">The same operation &mdash; the difference is why it is performed.</span></span>
+        <span class="sr-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="intraocular-lens-options.html" class="surgery-row reveal group" style="transition-delay:.06s">
+        <span><span class="sr-title">Intraocular Lens Options</span><span class="sr-desc">Monofocal, monovision, EDoF, multifocal and toric lenses compared.</span></span>
+        <span class="sr-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="pterygium-surgery.html" class="surgery-row reveal group" style="transition-delay:.12s">
+        <span><span class="sr-title">Pterygium Surgery</span><span class="sr-desc">Removal with a conjunctival graft, performed as day surgery.</span></span>
+        <span class="sr-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="oculoplastic-surgery.html" class="surgery-row reveal group" style="transition-delay:.18s">
+        <span><span class="sr-title">Oculoplastic Surgery</span><span class="sr-desc">Eyelid, tear drainage and periocular procedures.</span></span>
+        <span class="sr-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="glaucoma-surgery.html" class="surgery-row reveal group" style="transition-delay:.24s">
+        <span><span class="sr-title">Glaucoma Surgery</span><span class="sr-desc">Performed locally in our Nelson day-surgery theatre complex.</span></span>
+        <span class="sr-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a href="laser-eye-surgery.html" class="surgery-row reveal group" style="transition-delay:.3s">
+        <span><span class="sr-title">Laser Eye Surgery</span><span class="sr-desc">Assessment in Nelson, in partnership with a leading laser surgeon.</span></span>
+        <span class="sr-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="relative isolate overflow-hidden bg-ink" aria-labelledby="cta-title">
   <div class="pointer-events-none absolute inset-0" style="background:
     radial-gradient(55% 90% at 50% -10%, rgba(27,111,179,.4), transparent 65%),
@@ -268,10 +329,13 @@ tailwind.config = {
   <div class="relative mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
-        <p class="font-display text-white">
-          <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
-          <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
-        </p>
+        <div class="flex items-center gap-4">
+          <img src="resources/brand%20assets/logo/logo-mark-inversed.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
+          <p class="font-display text-white">
+            <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
+            <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
+          </p>
+        </div>
         <p class="mt-5 text-sm leading-[1.9] text-crest/70">102 Franklyn Street<br>Nelson 7010<br>New Zealand</p>
         <a href="map.html" class="link-inline mt-4 inline-block !text-sky2 text-sm !decoration-brand hover:!text-white">Map to Our Clinic</a>
       </div>

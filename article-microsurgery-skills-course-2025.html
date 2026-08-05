@@ -143,7 +143,16 @@ tailwind.config = {
           </div>
         </div>
       </div>
-      <a href="patient-info.html" class="navlink" >Patient Info</a>
+      <div class="has-sub relative">
+        <a href="patient-info.html" class="navlink inline-flex items-center gap-1.5" >Patient Info
+          <svg class="h-3 w-3 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="submenu">
+          <div class="rounded-2xl border border-tint bg-white p-2 shadow-lift">
+            <a href="cataract-and-refractive-lens-exchange.html" class="sublink">Cataract Surgery</a><a href="cataract-and-refractive-lens-exchange.html" class="sublink">Refractive Lens Exchange</a><a href="intraocular-lens-options.html" class="sublink">Intraocular Lens Options</a><a href="pterygium-surgery.html" class="sublink">Pterygium Surgery</a><a href="oculoplastic-surgery.html" class="sublink">Oculoplastic Surgery</a><a href="glaucoma-surgery.html" class="sublink">Glaucoma Surgery</a>
+          </div>
+        </div>
+      </div>
       <a href="news.html" class="navlink" aria-current="page">News</a>
       <a href="contact.html" class="btn-primary !px-6 !py-2.5 text-[13px] uppercase tracking-[0.1em]">Contact</a>
     </nav>
@@ -172,7 +181,15 @@ tailwind.config = {
         <a href="consults.html" class="block py-2 text-sm text-slate2">Consults</a><a href="cataract-and-other-surgeries.html" class="block py-2 text-sm text-slate2">Cataract and Other Surgeries</a><a href="surgery-faqs.html" class="block py-2 text-sm text-slate2">Surgery FAQs</a><a href="anaesthesia.html" class="block py-2 text-sm text-slate2">Anaesthesia</a>
       </div>
     </details>
-    <a href="patient-info.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info</a>
+    <details class="border-b border-tint">
+      <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info
+        <svg class="h-3.5 w-3.5 text-haze" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="pb-4 pl-4">
+        <a href="patient-info.html" class="block py-2 text-sm font-semibold text-brand">Patient Info — overview</a>
+        <a href="cataract-and-refractive-lens-exchange.html" class="block py-2 text-sm text-slate2">Cataract Surgery</a><a href="cataract-and-refractive-lens-exchange.html" class="block py-2 text-sm text-slate2">Refractive Lens Exchange</a><a href="intraocular-lens-options.html" class="block py-2 text-sm text-slate2">Intraocular Lens Options</a><a href="pterygium-surgery.html" class="block py-2 text-sm text-slate2">Pterygium Surgery</a><a href="oculoplastic-surgery.html" class="block py-2 text-sm text-slate2">Oculoplastic Surgery</a><a href="glaucoma-surgery.html" class="block py-2 text-sm text-slate2">Glaucoma Surgery</a>
+      </div>
+    </details>
     <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">News</a>
     <a href="contact.html" class="btn-primary mt-6 w-full">Contact</a>
   </nav>
@@ -224,10 +241,13 @@ tailwind.config = {
   <div class="relative mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
-        <p class="font-display text-white">
-          <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
-          <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
-        </p>
+        <div class="flex items-center gap-4">
+          <img src="resources/brand%20assets/logo/logo-mark-inversed.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
+          <p class="font-display text-white">
+            <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
+            <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
+          </p>
+        </div>
         <p class="mt-5 text-sm leading-[1.9] text-crest/70">102 Franklyn Street<br>Nelson 7010<br>New Zealand</p>
         <a href="map.html" class="link-inline mt-4 inline-block !text-sky2 text-sm !decoration-brand hover:!text-white">Map to Our Clinic</a>
       </div>
