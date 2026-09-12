@@ -93,21 +93,23 @@ tailwind.config = {
   details.faq[open] .faq-icon { transform: rotate(45deg); }
   details.faq .faq-body { @apply pb-7 pr-10 leading-[1.75] max-w-3xl; }
 
-  /* front-page surgery links: solid cards on the dark hero, flooding brand-blue on hover */
-  .surgery-card { @apply relative isolate flex min-h-[13.5rem] flex-col overflow-hidden rounded-2xl bg-white p-6 text-left shadow-lift outline-none transition-[transform,box-shadow] duration-300; }
-  .surgery-card::before { content:""; position:absolute; inset:0; z-index:-1; opacity:0; transition: opacity .35s cubic-bezier(.22,1,.36,1);
+  /* front-page surgery links: the <a> is a static hit area; only .sc-inner lifts and floods brand-blue,
+     so the pointer never leaves the link mid-hover (which caused a flicker loop) */
+  .surgery-card { @apply relative block rounded-2xl outline-none; }
+  .surgery-card:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 4px; }
+  .surgery-card .sc-inner { @apply relative isolate flex min-h-[13.5rem] flex-col overflow-hidden rounded-2xl bg-white p-6 text-left shadow-lift transition-[transform,box-shadow] duration-300 h-full; will-change: transform; }
+  .surgery-card .sc-inner::before { content:""; position:absolute; inset:0; z-index:-1; opacity:0; transition: opacity .35s cubic-bezier(.22,1,.36,1);
     background: radial-gradient(120% 90% at 100% 0%, #2A86D0 0%, #1B6FB3 45%, #0F4C85 100%); }
-  .surgery-card::after { content:""; position:absolute; left:0; right:0; top:0; height:4px; background: linear-gradient(90deg,#1B6FB3,#7FB9E0); transition: opacity .35s; }
-  .surgery-card:hover, .surgery-card:focus-visible { transform: translateY(-6px); box-shadow: 0 4px 8px rgba(6,24,43,.25), 0 28px 56px -16px rgba(27,111,179,.6); }
-  .surgery-card:hover::before, .surgery-card:focus-visible::before { opacity:1; }
-  .surgery-card:hover::after, .surgery-card:focus-visible::after { opacity:0; }
-  .surgery-card:active { transform: translateY(-2px) scale(.99); }
-  .surgery-card:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
-  .surgery-card .sc-icon { @apply grid h-12 w-12 place-items-center rounded-xl bg-mist text-brand transition-colors duration-300; }
+  .surgery-card .sc-inner::after { content:""; position:absolute; left:0; right:0; top:0; height:4px; background: linear-gradient(90deg,#1B6FB3,#7FB9E0); transition: opacity .35s; }
+  .surgery-card:hover .sc-inner, .surgery-card:focus-visible .sc-inner { transform: translateY(-6px); box-shadow: 0 4px 8px rgba(6,24,43,.25), 0 28px 56px -16px rgba(27,111,179,.6); }
+  .surgery-card:hover .sc-inner::before, .surgery-card:focus-visible .sc-inner::before { opacity:1; }
+  .surgery-card:hover .sc-inner::after, .surgery-card:focus-visible .sc-inner::after { opacity:0; }
+  .surgery-card:active .sc-inner { transform: translateY(-2px) scale(.99); }
+  .surgery-card .sc-icon { @apply grid h-12 w-12 place-items-center rounded-xl text-brand transition-colors duration-300; background: linear-gradient(145deg,#EEF3F8,#D9E9F5); box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 2px rgba(10,37,64,.08); }
   .surgery-card .sc-label { @apply mt-5 font-display text-xl font-bold leading-[1.2] tracking-[-0.015em] text-ink transition-colors duration-300 md:text-[1.35rem]; }
   .surgery-card .sc-desc { @apply mt-2 text-[15px] leading-[1.55] text-slate2 transition-colors duration-300; }
   .surgery-card .sc-arrow { @apply mt-auto grid h-9 w-9 shrink-0 place-items-center self-end rounded-full bg-brand text-white transition-[transform,background-color,color] duration-300; }
-  .surgery-card:hover .sc-icon, .surgery-card:focus-visible .sc-icon { @apply bg-white/15 text-white; }
+  .surgery-card:hover .sc-icon, .surgery-card:focus-visible .sc-icon { @apply text-white; background: rgba(255,255,255,.16); box-shadow: none; }
   .surgery-card:hover .sc-label, .surgery-card:focus-visible .sc-label { @apply text-white; }
   .surgery-card:hover .sc-desc, .surgery-card:focus-visible .sc-desc { @apply text-crest; }
   .surgery-card:hover .sc-arrow, .surgery-card:focus-visible .sc-arrow { transform: translateX(4px); @apply bg-white text-brand; }
@@ -237,28 +239,36 @@ tailwind.config = {
       <p id="surgeries-label" class="focus-in text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2/80" style="animation-delay:.5s">Considering eye surgery? Start here</p>
       <div class="mt-6 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
         <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group" style="animation-delay:.55s">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3.2"/><path d="M12 8.8a3.2 3.2 0 0 1 3.2 3.2" opacity=".55"/></svg></span>
+          <span class="sc-inner">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0Z"/><circle cx="12" cy="12" r="3.25"/><path d="M13.6 10.4a2.3 2.3 0 0 1 .6 1.6" opacity=".6"/></svg></span>
           <span class="sc-label">Cataract Surgery</span>
           <span class="sc-desc">Clear vision restored when the eye&rsquo;s natural lens clouds over.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
         </a>
         <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group" style="animation-delay:.63s">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 3.5V8h-4.5"/><circle cx="12" cy="12" r="3.2"/></svg></span>
+          <span class="sc-inner">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/><circle cx="12" cy="12" r="2.6"/></svg></span>
           <span class="sc-label">Refractive Lens Exchange</span>
           <span class="sc-desc">Lens replacement to reduce your dependence on glasses.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
         </a>
         <a href="services.html#surgery-information" class="surgery-card focus-in group" style="animation-delay:.71s">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5c2.2-2.8 5-4 8-4s5.8 1.2 8 4"/><path d="M4 8.5c2.2 2.8 5 4 8 4s5.8-1.2 8-4"/><path d="M12 12.5V19M9 16.5l3 3 3-3" opacity=".55"/></svg></span>
+          <span class="sc-inner">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13c2.2-4.6 5.4-7 9-7s6.8 2.4 9 7"/><path d="M12 6V3.5M6.4 7.6 4.9 5.9M17.6 7.6l1.5-1.7"/><path d="M6.5 16.5c1.6 1.4 3.5 2.1 5.5 2.1s3.9-.7 5.5-2.1" opacity=".55"/></svg></span>
           <span class="sc-label">Oculoplastic, Glaucoma &amp; other surgeries</span>
           <span class="sc-desc">Eyelid, tear-duct, pterygium and pressure-lowering procedures.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
         </a>
         <a href="laser-eye-surgery.html" class="surgery-card focus-in group" style="animation-delay:.79s">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21"/><path d="M5.6 5.6l2.3 2.3M16.1 16.1l2.3 2.3M18.4 5.6l-2.3 2.3M7.9 16.1l-2.3 2.3" opacity=".55"/></svg></span>
+          <span class="sc-inner">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M5.06 12.33a1 1 0 0 1 0-.66 7.5 7.5 0 0 1 13.88 0 1 1 0 0 1 0 .66 7.5 7.5 0 0 1-13.88 0Z"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span>
           <span class="sc-label">Laser Vision Correction</span>
           <span class="sc-desc">Assessed here in Nelson, in partnership with a leading laser surgeon.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
         </a>
       </div>
     </nav>
