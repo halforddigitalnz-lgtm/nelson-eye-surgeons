@@ -93,6 +93,15 @@ tailwind.config = {
   details.faq[open] .faq-icon { transform: rotate(45deg); }
   details.faq .faq-body { @apply pb-7 pr-10 leading-[1.75] max-w-3xl; }
 
+  /* Choosing Your Lens: each topic sits in its own card with a bold, ruled heading */
+  .lens-section { @apply relative mt-8 rounded-3xl bg-white p-7 shadow-card ring-1 ring-tint md:p-10 first:mt-0; }
+  .lens-h2 { @apply relative font-display text-3xl font-bold tracking-[-0.03em] text-ink md:text-[2.3rem] md:leading-[1.15]; padding-bottom: 1.1rem; margin-bottom: .25rem; border-bottom: 1px solid #E2EBF3; }
+  .lens-h2::after { content:""; position:absolute; left:0; bottom:-1px; height:3px; width:4.5rem; border-radius: 2px; background: linear-gradient(90deg,#1B6FB3,#7FB9E0); }
+  .lens-h3 { @apply mt-9 flex items-center gap-3 font-display text-lg font-bold tracking-tight text-ink md:text-xl; }
+  .lens-h3::before { content:""; @apply h-2 w-2 shrink-0 rounded-full bg-brand; }
+  .lens-section .prose-p, .lens-section ul { @apply text-slate2; }
+  .toc-link.is-active { @apply border-brand bg-mist font-semibold text-brand; }
+
   .prose-p { @apply leading-[1.75]; }
   .link-inline { @apply font-semibold text-brand underline decoration-sky2 decoration-2 underline-offset-4 outline-none transition-colors duration-150; }
   .link-inline:hover, .link-inline:focus-visible { @apply text-ink decoration-brand; }
@@ -153,7 +162,7 @@ tailwind.config = {
         </div>
       </div>
       <a href="patient-info.html" class="navlink" >Patient Info</a>
-      <a href="news.html" class="navlink" >News</a>
+      <a href="news.html" class="navlink" >Blog</a>
       <a href="contact.html" class="btn-primary !px-6 !py-2.5 text-[13px] uppercase tracking-[0.1em]">Contact</a>
     </nav>
     <button id="menuBtn" class="rounded-lg p-2 text-ink outline-none ring-brand focus-visible:ring-2 lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
@@ -185,14 +194,14 @@ tailwind.config = {
       </div>
     </details>
     <a href="patient-info.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info</a>
-    <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">News</a>
+    <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Blog</a>
     <a href="contact.html" class="btn-primary mt-6 w-full">Contact</a>
   </nav>
 </header>
 <main id="main">
 
 <section class="relative isolate mt-[76px] overflow-hidden bg-ink">
-  <img src="resources/site-images/consults-banner-fcd5f0eb.jpg" alt="" class="absolute inset-0 h-full w-full object-cover">
+  <img src="resources/site-images/cataract-and-other-surgeries-banner-19d053b0.jpg" alt="" style="object-position:center 30%" class="absolute inset-0 h-full w-full object-cover">
   <div class="absolute inset-0 bg-ink/50 mix-blend-multiply" aria-hidden="true"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-abyss/90 via-ink/55 to-ink/10" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
@@ -222,126 +231,113 @@ tailwind.config = {
       <nav class="lg:sticky lg:top-28 lg:self-start" aria-label="On this page">
         <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">On this page</p>
         <ul class="mt-5 space-y-1">
-          <li><a href="#monofocal" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Monofocal lenses</a></li>
-          <li><a href="#monovision" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Monovision (blended vision)</a></li>
-          <li><a href="#edof" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Extended Depth of Focus (EDoF)</a></li>
-          <li><a href="#multifocal" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Multifocal lenses</a></li>
-          <li><a href="#toric" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Astigmatism (toric lenses)</a></li>
-          <li><a href="#expectations" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Setting realistic expectations</a></li>
-          <li><a href="#health-nz" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Health NZ funded patients</a></li>
+          <li><a class="toc-link" href="#monofocal" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Monofocal lenses</a></li>
+          <li><a class="toc-link" href="#monovision" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Monovision (blended vision)</a></li>
+          <li><a class="toc-link" href="#edof" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Extended Depth of Focus (EDoF)</a></li>
+          <li><a class="toc-link" href="#multifocal" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Multifocal lenses</a></li>
+          <li><a class="toc-link" href="#toric" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Astigmatism (toric lenses)</a></li>
+          <li><a class="toc-link" href="#expectations" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Setting realistic expectations</a></li>
+          <!-- Health NZ funded patients link retired Sep 2026; see commented section below to restore.
+          <li><a class="toc-link" href="#health-nz" class="block rounded-lg py-2 pl-3 pr-2 text-sm leading-snug text-slate2 outline-none ring-brand transition-colors duration-150 hover:bg-mist hover:text-brand focus-visible:ring-2 border-l-2 border-tint hover:border-brand">Health NZ funded patients</a></li>
+          -->
         </ul>
       </nav>
       <div>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="monofocal" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Monofocal Lenses</h2>
+      <section class="lens-section">
+        <h2 id="monofocal" class="lens-h2 reveal scroll-mt-32">Monofocal Lenses</h2>
         
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">What is a monofocal lens?</h3>
+        <h3 class="lens-h3 reveal">What is a monofocal lens?</h3>
         <p class="prose-p reveal mt-5 !mt-4">A monofocal lens is designed to provide clear vision at one focal distance only.</p>
         <p class="prose-p reveal mt-5">Most patients choose to have both eyes focused for distance vision, giving excellent clarity for activities such as driving, television and outdoor activities.</p>
         <p class="prose-p reveal mt-5">Monofocal lenses provide outstanding optical quality and have the lowest risk of unwanted visual effects such as halos and glare.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Will I need glasses?</h3>
+        <h3 class="lens-h3 reveal">Will I need glasses?</h3>
         <p class="prose-p reveal mt-5 !mt-4">Yes. If both eyes are focused for distance, you will usually need glasses for activities within arm&rsquo;s reach, including:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Reading</li><li>Mobile phone use</li><li>Computer work</li><li>Sewing, hobbies and other close tasks</li></ul>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Best suited for</h3>
+        <h3 class="lens-h3 reveal">Best suited for</h3>
         <p class="prose-p reveal mt-5 !mt-4">People who:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Want the sharpest possible vision</li><li>Prefer to minimise halos and glare</li><li>Are happy to wear reading glasses when needed</li></ul>
-      </div>
+      </section>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="monovision" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Monovision (Blended Vision)</h2>
+      <section class="lens-section">
+        <h2 id="monovision" class="lens-h2 reveal scroll-mt-32">Monovision (Blended Vision)</h2>
         
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">What is monovision?</h3>
+        <h3 class="lens-h3 reveal">What is monovision?</h3>
         <p class="prose-p reveal mt-5 !mt-4">Monovision uses monofocal lenses to give each eye a different focus. One eye is corrected for distance vision and the other for a degree of near vision.</p>
         <p class="prose-p reveal mt-5">Your brain naturally combines the images from both eyes, allowing many people to see comfortably across a wider range of distances with much less dependence on glasses.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Benefits</h3>
+        <h3 class="lens-h3 reveal">Benefits</h3>
         <p class="prose-p reveal mt-5 !mt-4">Many patients can comfortably perform everyday activities such as:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Reading text messages</li><li>Shopping</li><li>Using a computer</li><li>Reading menus</li><li>General household tasks</li></ul>
         <p class="prose-p reveal mt-5">Because monovision uses monofocal lenses, it maintains excellent optical clarity with minimal halos or glare.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Are there any compromises?</h3>
+        <h3 class="lens-h3 reveal">Are there any compromises?</h3>
         <p class="prose-p reveal mt-5 !mt-4">Some people notice:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Slightly reduced depth perception</li><li>A need for glasses for prolonged reading or very fine print</li><li>Occasional glasses for night driving or demanding visual tasks</li></ul>
         <p class="prose-p reveal mt-5">Most people adapt within days to several weeks.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Best suited for</h3>
+        <h3 class="lens-h3 reveal">Best suited for</h3>
         <p class="prose-p reveal mt-5 !mt-4">People who:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Wish to reduce their dependence on reading glasses</li><li>Have realistic expectations about the small compromises involved</li><li>Have previously worn monovision contact lenses or are willing to trial them before surgery</li></ul>
         <p class="prose-p reveal mt-5">A contact lens trial is strongly recommended before permanently creating monovision with surgery.</p>
-      </div>
+      </section>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="edof" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Extended Depth of Focus (EDoF) Lenses</h2>
+      <section class="lens-section">
+        <h2 id="edof" class="lens-h2 reveal scroll-mt-32">Extended Depth of Focus (EDoF) Lenses</h2>
         
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">What is an EDoF lens?</h3>
+        <h3 class="lens-h3 reveal">What is an EDoF lens?</h3>
         <p class="prose-p reveal mt-5 !mt-4">Extended Depth of Focus (EDoF) lenses provide a continuous range of vision from distance through to intermediate.</p>
         <p class="prose-p reveal mt-5">They work particularly well for activities such as:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Driving</li><li>Walking</li><li>Shopping</li><li>Computer work</li></ul>
         <p class="prose-p reveal mt-5">Compared with multifocal lenses, EDoF lenses generally produce fewer halos and less glare at night.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Will I need glasses?</h3>
+        <h3 class="lens-h3 reveal">Will I need glasses?</h3>
         <p class="prose-p reveal mt-5 !mt-4">Usually yes. Reading glasses are still required for small print and prolonged close work.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Best suited for</h3>
+        <h3 class="lens-h3 reveal">Best suited for</h3>
         <p class="prose-p reveal mt-5 !mt-4">People who:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Want excellent distance and intermediate vision</li><li>Wish to minimise night-time visual disturbances</li><li>Are happy to wear reading glasses for close work</li></ul>
-      </div>
+      </section>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="multifocal" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Multifocal (Full Range of Vision) Lenses</h2>
+      <section class="lens-section">
+        <h2 id="multifocal" class="lens-h2 reveal scroll-mt-32">Multifocal (Full Range of Vision) Lenses</h2>
         
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">What is a multifocal lens?</h3>
+        <h3 class="lens-h3 reveal">What is a multifocal lens?</h3>
         <p class="prose-p reveal mt-5 !mt-4">Multifocal lenses are designed to provide vision at distance, intermediate and near, offering the greatest opportunity to reduce dependence on glasses.</p>
         <p class="prose-p reveal mt-5">Many patients can carry out most daily activities without spectacles.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Things to consider</h3>
+        <h3 class="lens-h3 reveal">Things to consider</h3>
         <p class="prose-p reveal mt-5 !mt-4">Because these lenses divide light between several focal points, some patients experience:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Halos</li><li>Glare</li><li>Starbursts around lights, particularly at night</li></ul>
         <p class="prose-p reveal mt-5">These effects often become less noticeable over the first few months as the brain adapts, although they may persist in a small number of people.</p>
-        <h3 class="reveal mt-10 font-display text-xl font-semibold tracking-tight md:text-[1.4rem]">Best suited for</h3>
+        <h3 class="lens-h3 reveal">Best suited for</h3>
         <p class="prose-p reveal mt-5 !mt-4">People who:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Place a high priority on minimising their need for glasses</li><li>Have healthy eyes</li><li>Understand and accept the possibility of night-time visual effects</li></ul>
-      </div>
+      </section>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="toric" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Astigmatism Correction (Toric Lenses)</h2>
+      <section class="lens-section">
+        <h2 id="toric" class="lens-h2 reveal scroll-mt-32">Astigmatism Correction (Toric Lenses)</h2>
         
         <p class="prose-p reveal mt-5 !mt-6">Astigmatism is caused by the front surface of the eye being more oval than round, resulting in blurred or distorted vision.</p>
         <p class="prose-p reveal mt-5">If you have significant astigmatism, a toric lens may improve your vision without increasing unwanted visual side effects.</p>
         <p class="prose-p reveal mt-5">Toric versions are available with:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li><a href="#monofocal" class="link-inline">Monofocal lenses</a></li><li><a href="#monovision" class="link-inline">Monovision</a></li><li><a href="#edof" class="link-inline">Extended Depth of Focus lenses</a></li><li><a href="#multifocal" class="link-inline">Multifocal lenses</a></li></ul>
-      </div>
+      </section>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="expectations" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Setting Realistic Expectations</h2>
+      <section class="lens-section">
+        <h2 id="expectations" class="lens-h2 reveal scroll-mt-32">Setting Realistic Expectations</h2>
         
         <p class="prose-p reveal mt-5 !mt-6">Modern intraocular lenses can provide excellent vision and significantly reduce dependence on glasses. However, no artificial lens can perfectly reproduce the focusing ability of a healthy young natural lens.</p>
         <p class="prose-p reveal mt-5">Every lens option involves some compromises. For example:</p>
         <ul class="prose-p reveal mt-4 list-disc space-y-2 pl-5"><li>Lenses that provide the sharpest optical quality usually require reading glasses.</li><li>Lenses that reduce dependence on glasses may increase the chance of halos, glare or other visual phenomena.</li><li>Some patients will still choose to wear glasses occasionally, depending on the task or lighting conditions.</li></ul>
         <p class="prose-p reveal mt-5">The best result is achieved by selecting the lens that best matches your eyes, lifestyle and expectations rather than trying to eliminate glasses at all costs.</p>
-      </div>
+      </section>
 
-      <div class="mt-16 border-t border-tint pt-12 first:mt-0 first:border-0 first:pt-0">
-        <h2 id="health-nz" class="reveal font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.4rem] md:leading-[1.2] scroll-mt-32">Information for Health NZ (Te Whatu Ora) Funded Patients</h2>
+      <!-- Health NZ (Te Whatu Ora) funded patients section retired Sep 2026 — may be needed again if outsourced work resumes.
+      <section class="lens-section">
+        <h2 id="health-nz" class="lens-h2 reveal scroll-mt-32">Information for Health NZ (Te Whatu Ora) Funded Patients</h2>
         
         <div class="reveal mt-6 rounded-3xl bg-mist/70 p-8 ring-1 ring-tint md:p-10">
           <p class="prose-p">For patients having cataract surgery funded by Te Whatu Ora (Health NZ), the type of intraocular lens is determined by Health NZ.</p>
           <p class="prose-p mt-5">Extended Depth of Focus (EDoF) and multifocal (full range of vision) lenses, are not available within the publicly funded service. Health NZ does not permit patients to contribute additional payment to upgrade to a premium lens as part of a funded procedure. If you wish to explore these intraocular lens options, this can only be done as part of a fully private <a href="cataract-and-refractive-lens-exchange.html" class="link-inline">cataract or refractive lens exchange</a> procedure.</p>
         </div>
       </div>
+      -->
       </div>
-    </div>
-  </div>
-</section>
-<section class="relative isolate overflow-hidden bg-ink" aria-labelledby="cta-title">
-  <div class="pointer-events-none absolute inset-0" style="background:
-    radial-gradient(55% 90% at 50% -10%, rgba(27,111,179,.4), transparent 65%),
-    radial-gradient(40% 60% at 90% 110%, rgba(127,185,224,.18), transparent 60%);"></div>
-  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
-  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
-  <div class="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
-    <h2 id="cta-title" class="!text-white">
-      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-semibold tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
-      <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.1s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/70</span><span class="font-display text-2xl font-normal tracking-[0.18em] text-crest md:text-4xl">To See What You've</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
-      <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.2s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/40</span><span class="font-display text-base font-normal tracking-[0.42em] text-sky2 md:text-xl">Been Missing.</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
-    </h2>
-    <div class="reveal mt-14" style="transition-delay:.3s">
-      <a href="contact.html" class="btn-light uppercase tracking-[0.12em]">Contact Us Today</a>
     </div>
   </div>
 </section>
@@ -355,7 +351,7 @@ tailwind.config = {
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
         <div class="flex items-center gap-4">
-          <img src="resources/brand%20assets/logo/logo-mark-inversed.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
+          <img src="resources/brand%20assets/logo/logo-mark-white.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
           <p class="font-display text-white">
             <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
             <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
@@ -367,7 +363,7 @@ tailwind.config = {
       <nav aria-label="Footer">
         <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2">Menu</p>
         <ul class="mt-5 space-y-3 text-sm">
-          <li><a href="index.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Home</a></li><li><a href="our-team.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Team</a></li><li><a href="services.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Services</a></li><li><a href="patient-info.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Patient Info</a></li><li><a href="news.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">News</a></li><li><a href="contact.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Contact</a></li>
+          <li><a href="index.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Home</a></li><li><a href="our-team.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Team</a></li><li><a href="services.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Services</a></li><li><a href="patient-info.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Patient Info</a></li><li><a href="news.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Blog</a></li><li><a href="contact.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Contact</a></li>
         </ul>
       </nav>
       <nav aria-label="Services">
@@ -382,10 +378,16 @@ tailwind.config = {
           <li><a href="mailto:info@eyenz.com?subject=Enquiry%20via%20website" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Email - info@eyenz.com</a></li>
           <li><a href="tel:035457900" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">03 545 7900</a></li>
         </ul>
-        <a href="contact.html" class="btn-light mt-7 !px-6 !py-3 text-[12px] uppercase tracking-[0.1em]">Contact Us Today</a>
+        <a href="contact.html" class="btn-light mt-7 !px-6 !py-3 text-[12px] uppercase tracking-[0.1em]">Book Appointment</a>
       </div>
     </div>
-    <div class="mt-14 border-t border-white/10 pt-7 text-xs text-crest/50">© Copyright 2026 NELSON EYE SURGEONS.</div>
+    <div class="mt-14 flex flex-col gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs text-crest/50">© Copyright 2026 NELSON EYE SURGEONS.</p>
+      <a href="contact.html" class="group inline-flex items-center gap-3 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-sky2">
+        <img src="resources/brand%20assets/logo/logo-mark-white.png" alt="" aria-hidden="true" class="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:-rotate-12">
+        <span class="text-sm text-crest/70 transition-colors duration-150 group-hover:text-white group-focus-visible:text-white">See what you've been missing. <span class="font-semibold text-white underline decoration-sky2/60 decoration-2 underline-offset-4 transition-colors duration-150 group-hover:decoration-white">Book an appointment</span></span>
+      </a>
+    </div>
   </div>
 </footer>
 
@@ -430,6 +432,20 @@ tailwind.config = {
     addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
     addEventListener('resize', update, { passive: true });
     update();
+  }
+
+  // "On this page" scroll-spy for the lens sections
+  const tocLinks = [...document.querySelectorAll('.toc-link')];
+  if (tocLinks.length) {
+    const byId = Object.fromEntries(tocLinks.map(a => [a.getAttribute('href').slice(1), a]));
+    const heads = Object.keys(byId).map(id => document.getElementById(id)).filter(Boolean);
+    const setActive = () => {
+      const line = innerHeight * 0.3;
+      let cur = heads[0];
+      for (const h of heads) if (h.getBoundingClientRect().top <= line) cur = h;
+      tocLinks.forEach(a => { const on = a === byId[cur.id]; a.classList.toggle('is-active', on); on ? a.setAttribute('aria-current','true') : a.removeAttribute('aria-current'); });
+    };
+    addEventListener('scroll', () => requestAnimationFrame(setActive), { passive: true }); setActive();
   }
 
 })();

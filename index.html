@@ -93,15 +93,24 @@ tailwind.config = {
   details.faq[open] .faq-icon { transform: rotate(45deg); }
   details.faq .faq-body { @apply pb-7 pr-10 leading-[1.75] max-w-3xl; }
 
-  /* front-page surgery links */
-  .surgery-card { @apply relative flex min-h-[6.25rem] items-center justify-between gap-5 rounded-2xl bg-white/90 px-6 py-5 text-left shadow-card ring-1 ring-inset ring-tint outline-none backdrop-blur-sm transition-[transform,box-shadow] duration-300; }
-  .surgery-card:hover, .surgery-card:focus-visible { transform: translateY(-4px); @apply shadow-lift ring-brand/40; }
-  .surgery-card:active { transform: translateY(-1px) scale(.99); }
-  .surgery-card:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 3px; }
-  .surgery-card .sc-label { @apply font-display text-lg font-semibold leading-[1.25] tracking-[-0.01em] text-ink transition-colors duration-200 md:text-xl; }
-  .surgery-card:hover .sc-label, .surgery-card:focus-visible .sc-label { @apply text-brand; }
-  .surgery-card .sc-arrow { @apply grid h-9 w-9 shrink-0 place-items-center rounded-full bg-mist text-brand transition-transform duration-300; }
-  .surgery-card:hover .sc-arrow, .surgery-card:focus-visible .sc-arrow { transform: translateX(4px); }
+  /* front-page surgery links: solid cards on the dark hero, flooding brand-blue on hover */
+  .surgery-card { @apply relative isolate flex min-h-[13.5rem] flex-col overflow-hidden rounded-2xl bg-white p-6 text-left shadow-lift outline-none transition-[transform,box-shadow] duration-300; }
+  .surgery-card::before { content:""; position:absolute; inset:0; z-index:-1; opacity:0; transition: opacity .35s cubic-bezier(.22,1,.36,1);
+    background: radial-gradient(120% 90% at 100% 0%, #2A86D0 0%, #1B6FB3 45%, #0F4C85 100%); }
+  .surgery-card::after { content:""; position:absolute; left:0; right:0; top:0; height:4px; background: linear-gradient(90deg,#1B6FB3,#7FB9E0); transition: opacity .35s; }
+  .surgery-card:hover, .surgery-card:focus-visible { transform: translateY(-6px); box-shadow: 0 4px 8px rgba(6,24,43,.25), 0 28px 56px -16px rgba(27,111,179,.6); }
+  .surgery-card:hover::before, .surgery-card:focus-visible::before { opacity:1; }
+  .surgery-card:hover::after, .surgery-card:focus-visible::after { opacity:0; }
+  .surgery-card:active { transform: translateY(-2px) scale(.99); }
+  .surgery-card:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
+  .surgery-card .sc-icon { @apply grid h-12 w-12 place-items-center rounded-xl bg-mist text-brand transition-colors duration-300; }
+  .surgery-card .sc-label { @apply mt-5 font-display text-xl font-bold leading-[1.2] tracking-[-0.015em] text-ink transition-colors duration-300 md:text-[1.35rem]; }
+  .surgery-card .sc-desc { @apply mt-2 text-[15px] leading-[1.55] text-slate2 transition-colors duration-300; }
+  .surgery-card .sc-arrow { @apply mt-auto grid h-9 w-9 shrink-0 place-items-center self-end rounded-full bg-brand text-white transition-[transform,background-color,color] duration-300; }
+  .surgery-card:hover .sc-icon, .surgery-card:focus-visible .sc-icon { @apply bg-white/15 text-white; }
+  .surgery-card:hover .sc-label, .surgery-card:focus-visible .sc-label { @apply text-white; }
+  .surgery-card:hover .sc-desc, .surgery-card:focus-visible .sc-desc { @apply text-crest; }
+  .surgery-card:hover .sc-arrow, .surgery-card:focus-visible .sc-arrow { transform: translateX(4px); @apply bg-white text-brand; }
 
   .prose-p { @apply leading-[1.75]; }
   .link-inline { @apply font-semibold text-brand underline decoration-sky2 decoration-2 underline-offset-4 outline-none transition-colors duration-150; }
@@ -171,7 +180,7 @@ tailwind.config = {
         </div>
       </div>
       <a href="patient-info.html" class="navlink" >Patient Info</a>
-      <a href="news.html" class="navlink" >News</a>
+      <a href="news.html" class="navlink" >Blog</a>
       <a href="contact.html" class="btn-primary !px-6 !py-2.5 text-[13px] uppercase tracking-[0.1em]">Contact</a>
     </nav>
     <button id="menuBtn" class="rounded-lg p-2 text-ink outline-none ring-brand focus-visible:ring-2 lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
@@ -203,158 +212,78 @@ tailwind.config = {
       </div>
     </details>
     <a href="patient-info.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Patient Info</a>
-    <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">News</a>
+    <a href="news.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Blog</a>
     <a href="contact.html" class="btn-primary mt-6 w-full">Contact</a>
   </nav>
 </header>
 <main id="main">
 
-<section class="relative isolate overflow-hidden" style="background:
-  linear-gradient(180deg, rgba(255,255,255,0) 72%, #FFFFFF 100%),
-  radial-gradient(75% 110% at 85% 8%, rgba(191,224,244,.55), transparent 62%),
-  radial-gradient(55% 90% at 4% 100%, rgba(226,235,243,.9), transparent 55%),
-  radial-gradient(40% 60% at 55% 120%, rgba(127,185,224,.18), transparent 60%), #FBFCFD;">
-  <div class="mx-auto max-w-6xl px-5 pb-20 pt-36 text-center md:px-8 md:pb-28 md:pt-48">
-    <p class="eyebrow reveal">Nelson Eye Surgeons — Specialist Ophthalmologists</p>
-    <h1 class="blur-in mx-auto mt-6 max-w-5xl font-display text-[2.7rem] font-medium leading-[1.06] tracking-[-0.03em] [text-wrap:balance] sm:text-6xl lg:text-[4.6rem]">Of the five senses, we agree that <em class="text-brand">your vision</em> is the most&nbsp;important.</h1>
+<section class="relative isolate mt-[76px] overflow-hidden bg-ink">
+  <img src="resources/site-images/front-1.jpeg" alt="" class="hero-img absolute inset-0 h-full w-full object-cover" style="object-position:center 88%">
+  <div class="absolute inset-0 bg-brand/45 mix-blend-multiply" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/30 to-abyss/85" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true" style="background:
+    radial-gradient(60% 70% at 50% 0%, rgba(10,37,64,.55), transparent 65%),
+    radial-gradient(45% 55% at 95% 100%, rgba(127,185,224,.12), transparent 60%);"></div>
+  <div class="relative mx-auto max-w-6xl px-5 pb-16 pt-20 text-center md:px-8 md:pb-24 md:pt-28">
+    <p class="eyebrow reveal !text-sky2">Nelson Eye Surgeons — Specialist Ophthalmologists</p>
+    <h1 class="blur-in mx-auto mt-6 max-w-5xl font-display text-[2.7rem] font-medium leading-[1.06] tracking-[-0.03em] !text-white [text-wrap:balance] sm:text-6xl lg:text-[4.6rem]">Of the five senses, we agree that <em class="text-sky2">your vision</em> is the most&nbsp;important.</h1>
+    <p class="focus-in mx-auto mt-7 max-w-2xl text-lg leading-[1.7] text-crest md:text-xl" style="animation-delay:.35s">As your specialist ophthalmologists for the top of the South Island, you can trust us to look after it.</p>
+    <div class="focus-in mt-9" style="animation-delay:.45s">
+      <a href="contact.html" class="btn-light uppercase tracking-[0.12em]">Book Appointment</a>
+    </div>
 
-    <nav class="mt-12 md:mt-14" aria-label="Our main surgeries">
-      <div class="grid gap-4 sm:grid-cols-6 md:gap-5">
-        <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group sm:col-span-2" style="animation-delay:.45s">
+    <nav class="mt-16 md:mt-20" aria-labelledby="surgeries-label">
+      <p id="surgeries-label" class="focus-in text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2/80" style="animation-delay:.5s">Considering eye surgery? Start here</p>
+      <div class="mt-6 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
+        <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group" style="animation-delay:.55s">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3.2"/><path d="M12 8.8a3.2 3.2 0 0 1 3.2 3.2" opacity=".55"/></svg></span>
           <span class="sc-label">Cataract Surgery</span>
+          <span class="sc-desc">Clear vision restored when the eye&rsquo;s natural lens clouds over.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
-        <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group sm:col-span-2" style="animation-delay:.53s">
+        <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group" style="animation-delay:.63s">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 3.5V8h-4.5"/><circle cx="12" cy="12" r="3.2"/></svg></span>
           <span class="sc-label">Refractive Lens Exchange</span>
+          <span class="sc-desc">Lens replacement to reduce your dependence on glasses.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
-        <a href="services.html#surgery-information" class="surgery-card focus-in group sm:col-span-2" style="animation-delay:.61s">
-          <span class="sc-label">Oculoplastic, Glaucoma<br class="hidden lg:block"> and other surgeries</span>
+        <a href="services.html#surgery-information" class="surgery-card focus-in group" style="animation-delay:.71s">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5c2.2-2.8 5-4 8-4s5.8 1.2 8 4"/><path d="M4 8.5c2.2 2.8 5 4 8 4s5.8-1.2 8-4"/><path d="M12 12.5V19M9 16.5l3 3 3-3" opacity=".55"/></svg></span>
+          <span class="sc-label">Oculoplastic, Glaucoma &amp; other surgeries</span>
+          <span class="sc-desc">Eyelid, tear-duct, pterygium and pressure-lowering procedures.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
-        <a href="laser-eye-surgery.html" class="surgery-card focus-in group sm:col-span-2 sm:col-start-3" style="animation-delay:.69s">
+        <a href="laser-eye-surgery.html" class="surgery-card focus-in group" style="animation-delay:.79s">
+          <span class="sc-icon" aria-hidden="true"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3.2M12 17.8V21M3 12h3.2M17.8 12H21"/><path d="M5.6 5.6l2.3 2.3M16.1 16.1l2.3 2.3M18.4 5.6l-2.3 2.3M7.9 16.1l-2.3 2.3" opacity=".55"/></svg></span>
           <span class="sc-label">Laser Vision Correction</span>
+          <span class="sc-desc">Assessed here in Nelson, in partnership with a leading laser surgeon.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </a>
       </div>
     </nav>
-
-    <p class="focus-in mx-auto mt-12 max-w-2xl text-lg leading-[1.7] md:text-xl" style="animation-delay:.79s">As your specialist ophthalmologists for the top of the South Island, you can trust us to look after it.</p>
-    <div class="focus-in mt-10" style="animation-delay:.87s">
-      <a href="contact.html" class="btn-primary uppercase tracking-[0.12em]">Contact Us Today</a>
-    </div>
   </div>
 </section>
 
 <section class="relative bg-white">
-  <div class="mx-auto max-w-7xl px-5 md:px-8">
-    <figure class="photo reveal aspect-[3/2] rounded-3xl shadow-lift md:aspect-[2/1]" data-parallax>
-      <img src="resources/site-images/front-1.jpeg" alt="The Nelson Eye Surgeons clinic, 102 Franklyn Street" loading="lazy" class="parallax-img object-[center_82%]">
-      <span class="tintlayer" aria-hidden="true"></span>
-    </figure>
-  </div>
-  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[0.95fr,1.05fr] lg:gap-20">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 md:px-8 md:py-28 lg:grid-cols-[0.95fr,1.05fr] lg:gap-20">
     <div>
       <p class="eyebrow reveal">Local, Independent Eye Care</p>
       <h2 class="reveal mt-4 font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.6rem] md:leading-[1.15]" style="transition-delay:.08s">Based in Nelson. Here before, during, and after&nbsp;surgery.</h2>
+      <figure class="photo reveal mt-10 aspect-[4/3] rounded-3xl shadow-lift" style="transition-delay:.16s">
+        <img src="resources/site-images/f77a1473--002.jpg" alt="The Nelson Eye Surgeons team" loading="lazy">
+        <span class="tintlayer" aria-hidden="true"></span>
+      </figure>
     </div>
-    <div>
-      <p class="prose-p reveal" style="transition-delay:.14s">We are a locally based, friendly and professional team of highly qualified surgeons, nurses, ophthalmic technicians and optometrists providing independent surgical and medical eye care to the top of the South Island including Nelson, Richmond, Motueka, Golden Bay and Marlborough.</p>
-      <p class="prose-p reveal mt-5" style="transition-delay:.2s">NELSON EYE SURGEONS believe that exceptional surgical outcomes rely on continuity of care, timely follow-up, and long-term local support - not simply a procedure. Because we are based in Nelson, we are uniquely positioned to provide comprehensive ophthalmic care within the community, before, during, and after surgery.</p>
-      <div class="reveal mt-9" style="transition-delay:.26s"><a href="our-team.html" class="btn-ghost">Our Specialists
-        <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="lg:pt-24">
+      <p class="prose-p reveal text-lg" style="transition-delay:.14s">We are a locally based, friendly and professional team of highly experienced, internationally trained surgeons, nurses, ophthalmic technicians and optometrists providing independent surgical and medical eye care to the top of the South Island including Nelson, Richmond, Motueka, Golden Bay and Marlborough.</p>
+      <p class="prose-p reveal mt-5 text-lg" style="transition-delay:.2s">NELSON EYE SURGEONS believe that exceptional surgical outcomes rely on continuity of care, timely follow-up, and long-term local support - not simply a procedure. Because we are based in Nelson, we are uniquely positioned to provide comprehensive ophthalmic care within the community, before, during, and after surgery.</p>
+      <div class="reveal mt-9 flex flex-wrap gap-3" style="transition-delay:.26s">
+        <a href="our-team.html" class="btn-ghost">Our Specialists
+          <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="services.html" class="btn-ghost">Our Services
+          <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="bg-mist/70">
-  <div class="mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
-    <div class="flex flex-wrap items-end justify-between gap-6">
-      <div>
-        <p class="eyebrow reveal">Our Services</p>
-        <h2 class="reveal mt-4 font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.6rem]" style="transition-delay:.08s">Continuity of care: from consultation<br class="hidden md:block"> to surgery and beyond.</h2>
-      </div>
-      <a href="services.html" class="btn-ghost reveal !bg-white" style="transition-delay:.16s">Our Services
-        <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </div>
-    <div class="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-      
-      <a href="consults.html" class="clipfix group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0s">
-        <img src="resources/site-images/consulting-eye-exam-new.jpeg" alt="Nelson Eye Surgeons Consults" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
-        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
-        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
-        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-semibold tracking-tight text-white">Consults</span>
-          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
-            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </span>
-      </a>
-      <a href="services.html#surgery-information" class="clipfix group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.07s">
-        <img src="resources/site-images/consulting-2-new.jpeg" alt="Surgeries performed at Nelson Eye Surgeons" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
-        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
-        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
-        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-semibold tracking-tight text-white">Surgeries</span>
-          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
-            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </span>
-      </a>
-      <a href="surgery-faqs.html" class="clipfix group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.14s">
-        <img src="resources/site-images/operating-2.jpeg" alt="Surgery FAQs" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
-        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
-        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
-        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-semibold tracking-tight text-white">Surgery FAQs</span>
-          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
-            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </span>
-      </a>
-      <a href="anaesthesia.html" class="clipfix group reveal relative block overflow-hidden rounded-2xl bg-ink shadow-card outline-none transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lift focus-visible:-translate-y-1.5 focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2" style="transition-delay:0.21000000000000002s">
-        <img src="resources/site-images/0b1a8587.jpg" alt="Anaesthesia" loading="lazy" class="aspect-[3/2] w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-[1.04] sm:aspect-[4/5]">
-        <span class="absolute inset-0 bg-sky2/25 mix-blend-multiply" aria-hidden="true"></span>
-        <span class="absolute inset-0 bg-gradient-to-t from-abyss/85 via-ink/25 to-transparent" aria-hidden="true"></span>
-        <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-5">
-          <span class="font-display text-xl font-semibold tracking-tight text-white">Anaesthesia</span>
-          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-transform duration-300 group-hover:translate-x-1">
-            <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-        </span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="bg-white">
-  <div class="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
-    <a href="https://cdn-asset-mel-2.airsquare.com/nelsoneyesurgeonsv2/library/patient-info/dry-eye.pdf" target="_blank" rel="noopener" class="group reveal flex flex-col items-start justify-between gap-6 rounded-3xl bg-gradient-to-r from-tint via-mist to-paper p-8 shadow-card outline-none ring-1 ring-tint transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift focus-visible:ring-2 focus-visible:ring-brand md:flex-row md:items-center md:p-12">
-      <div>
-        <h2 class="font-display text-3xl font-semibold tracking-[-0.02em] md:text-4xl">Sore or watery eyes?</h2>
-        <p class="prose-p mt-3 max-w-xl">Read and follow our helpful guidance, available to you for free.</p>
-      </div>
-      <span class="btn-primary shrink-0 uppercase tracking-[0.1em]">Dry &amp; Watery Eyes — PDF</span>
-    </a>
-  </div>
-</section>
-
-
-<section class="relative isolate overflow-hidden bg-ink" aria-labelledby="cta-title">
-  <div class="pointer-events-none absolute inset-0" style="background:
-    radial-gradient(55% 90% at 50% -10%, rgba(27,111,179,.4), transparent 65%),
-    radial-gradient(40% 60% at 90% 110%, rgba(127,185,224,.18), transparent 60%);"></div>
-  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
-  <div class="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5" aria-hidden="true"></div>
-  <div class="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
-    <h2 id="cta-title" class="!text-white">
-      <span class="reveal flex items-baseline justify-center gap-4"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/200</span><span class="font-display text-5xl font-semibold tracking-[-0.03em] md:text-7xl">Get in Touch</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
-      <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.1s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/70</span><span class="font-display text-2xl font-normal tracking-[0.18em] text-crest md:text-4xl">To See What You've</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
-      <span class="reveal mt-6 flex items-baseline justify-center gap-4" style="transition-delay:.2s"><span class="hidden w-12 shrink-0 text-right font-body text-[10px] tracking-widest text-sky2/50 md:block" aria-hidden="true">20/40</span><span class="font-display text-base font-normal tracking-[0.42em] text-sky2 md:text-xl">Been Missing.</span><span class="hidden w-12 shrink-0 md:block" aria-hidden="true"></span></span>
-    </h2>
-    <div class="reveal mt-14" style="transition-delay:.3s">
-      <a href="contact.html" class="btn-light uppercase tracking-[0.12em]">Contact Us Today</a>
     </div>
   </div>
 </section>
@@ -368,7 +297,7 @@ tailwind.config = {
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
         <div class="flex items-center gap-4">
-          <img src="resources/brand%20assets/logo/logo-mark-inversed.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
+          <img src="resources/brand%20assets/logo/logo-mark-white.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
           <p class="font-display text-white">
             <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
             <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
@@ -380,7 +309,7 @@ tailwind.config = {
       <nav aria-label="Footer">
         <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2">Menu</p>
         <ul class="mt-5 space-y-3 text-sm">
-          <li><a href="index.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Home</a></li><li><a href="our-team.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Team</a></li><li><a href="services.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Services</a></li><li><a href="patient-info.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Patient Info</a></li><li><a href="news.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">News</a></li><li><a href="contact.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Contact</a></li>
+          <li><a href="index.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Home</a></li><li><a href="our-team.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Team</a></li><li><a href="services.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Our Services</a></li><li><a href="patient-info.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Patient Info</a></li><li><a href="news.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Blog</a></li><li><a href="contact.html" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Contact</a></li>
         </ul>
       </nav>
       <nav aria-label="Services">
@@ -395,10 +324,16 @@ tailwind.config = {
           <li><a href="mailto:info@eyenz.com?subject=Enquiry%20via%20website" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">Email - info@eyenz.com</a></li>
           <li><a href="tel:035457900" class="text-crest/80 outline-none transition-colors duration-150 hover:text-white focus-visible:text-white">03 545 7900</a></li>
         </ul>
-        <a href="contact.html" class="btn-light mt-7 !px-6 !py-3 text-[12px] uppercase tracking-[0.1em]">Contact Us Today</a>
+        <a href="contact.html" class="btn-light mt-7 !px-6 !py-3 text-[12px] uppercase tracking-[0.1em]">Book Appointment</a>
       </div>
     </div>
-    <div class="mt-14 border-t border-white/10 pt-7 text-xs text-crest/50">© Copyright 2026 NELSON EYE SURGEONS.</div>
+    <div class="mt-14 flex flex-col gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs text-crest/50">© Copyright 2026 NELSON EYE SURGEONS.</p>
+      <a href="contact.html" class="group inline-flex items-center gap-3 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-sky2">
+        <img src="resources/brand%20assets/logo/logo-mark-white.png" alt="" aria-hidden="true" class="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:-rotate-12">
+        <span class="text-sm text-crest/70 transition-colors duration-150 group-hover:text-white group-focus-visible:text-white">See what you've been missing. <span class="font-semibold text-white underline decoration-sky2/60 decoration-2 underline-offset-4 transition-colors duration-150 group-hover:decoration-white">Book an appointment</span></span>
+      </a>
+    </div>
   </div>
 </footer>
 
