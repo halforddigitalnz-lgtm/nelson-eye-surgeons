@@ -375,11 +375,6 @@ tailwind.config = {
           <p class="field-error" data-error-for="referral">Please attach up to 3 files of 5 MB or less, in PDF, JPG or PNG format.</p>
         </div>
 
-        <div class="mt-10 max-w-sm">
-          <label for="human" class="field-label">How many eyes does a person usually have? Please write the number.</label>
-          <input id="human" class="field mt-3 max-w-[8rem]" type="text" name="human_check" inputmode="numeric" autocomplete="off" required>
-          <p class="field-error" data-error-for="human">That answer doesn't look right. Please try again.</p>
-        </div>
         <!-- honeypot: hidden from people, filled by bots -->
         <div class="hidden" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
@@ -549,7 +544,6 @@ tailwind.config = {
       need(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim()), 'email', [form.email]);
       need(form.phone.value.replace(/\D/g,'').length >= 6, 'phone', [form.phone]);
       need(!fileInput.files.length || validFiles(), 'referral');
-      need(/^\s*(2|two)\s*$/i.test(form.human_check.value), 'human', [form.human_check]);
       return ok;
     };
 
@@ -560,7 +554,7 @@ tailwind.config = {
       const btn = form.querySelector('button[type="submit"]');
       const data = new FormData(form);
       const dob = `${form.dob_day.value.padStart(2,'0')}/${form.dob_month.value.padStart(2,'0')}/${form.dob_year.value}`;
-      data.set('date_of_birth', dob); ['dob_day','dob_month','dob_year','human_check','website'].forEach(k => data.delete(k));
+      data.set('date_of_birth', dob); ['dob_day','dob_month','dob_year','website'].forEach(k => data.delete(k));
       data.set('_subject', `Appointment request — ${form.reason.value} — ${form.first_name.value} ${form.last_name.value}`);
 
       if (form.dataset.endpoint) {
