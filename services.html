@@ -36,6 +36,8 @@ tailwind.config = {
   html { scroll-behavior: smooth; }
   body { @apply font-body text-slate2 bg-paper antialiased; }
   h1,h2,h3 { @apply text-ink; }
+  ::selection { background: #BFE0F4; color: #0A2540; }
+  a, button, summary { -webkit-tap-highlight-color: transparent; }
 
   /* grain */
   .grain::before {
@@ -45,25 +47,32 @@ tailwind.config = {
 
   .eyebrow { @apply font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-brand; }
 
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full font-body text-sm font-semibold tracking-wide transition-[transform,box-shadow,background-color,color] duration-200 outline-none; }
+  /* buttons: hover lift only where a real pointer hovers — on touch the hover stuck after a tap and the
+     browser's grey tap-highlight flashed over it. Press feedback is a scale + tone shift that reads on its own. */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full font-body text-sm font-semibold tracking-wide outline-none select-none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 160ms cubic-bezier(.23,1,.32,1), box-shadow 200ms ease, background-color 200ms ease, color 200ms ease; }
   .btn:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 3px; }
   .btn-primary { @apply btn bg-brand text-white px-7 py-3.5 shadow-btn; }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(10,37,64,.2), 0 12px 28px -6px rgba(27,111,179,.45); background-color: #175F9A; }
-  .btn-primary:active { transform: translateY(0) scale(.98); }
   .btn-ghost { @apply btn text-brand px-7 py-3.5 ring-1 ring-inset ring-brand/25 bg-white/60; }
-  .btn-ghost:hover { transform: translateY(-2px); @apply bg-white ring-brand/50 shadow-card; }
-  .btn-ghost:active { transform: translateY(0) scale(.98); }
   .btn-light { @apply btn bg-white text-ink px-7 py-3.5 shadow-btn; }
-  .btn-light:hover { transform: translateY(-2px); @apply text-brand; }
-  .btn-light:active { transform: translateY(0) scale(.98); }
+  .btn-light:focus-visible { outline-color: #FFFFFF; }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(10,37,64,.2), 0 12px 28px -6px rgba(27,111,179,.45); background-color: #175F9A; }
+    .btn-ghost:hover { transform: translateY(-2px); @apply bg-white ring-brand/50 shadow-card; }
+    .btn-light:hover { transform: translateY(-2px); @apply text-brand; }
+  }
+  .btn-primary:active { transform: translateY(0) scale(.97); background-color: #155A92; }
+  .btn-ghost:active { transform: translateY(0) scale(.97); @apply bg-white ring-brand/50; }
+  .btn-light:active { transform: translateY(0) scale(.97); background-color: #EEF3F8; @apply text-brand; }
 
   .navlink { @apply relative font-body text-[13px] font-semibold uppercase tracking-[0.12em] text-ink/80 py-2 outline-none transition-colors duration-200; }
   .navlink:hover, .navlink:focus-visible { @apply text-brand; }
-  .navlink::after { content:""; @apply absolute left-0 -bottom-0.5 h-[2px] w-full bg-brand origin-left transition-transform duration-300; transform: scaleX(0); }
+  .navlink::after { content:""; @apply absolute left-0 -bottom-0.5 h-[2px] w-full bg-brand origin-left transition-transform duration-200 ease-[cubic-bezier(.23,1,.32,1)]; transform: scaleX(0); }
   .navlink:hover::after, .navlink:focus-visible::after, .navlink[aria-current="page"]::after { transform: scaleX(1); }
   .navlink[aria-current="page"] { @apply text-brand; }
 
-  .submenu { @apply invisible opacity-0 translate-y-2 absolute left-1/2 top-full pt-4 z-50 transition-[opacity,transform,visibility] duration-200; transform: translate(-50%, 8px); }
+  .submenu { @apply invisible opacity-0 translate-y-2 absolute left-1/2 top-full pt-4 z-50 transition-[opacity,transform,visibility] duration-200 ease-[cubic-bezier(.23,1,.32,1)]; transform: translate(-50%, 8px); }
   .has-sub:hover .submenu, .has-sub:focus-within .submenu { @apply visible opacity-100; transform: translate(-50%, 0); }
   .sublink { @apply block whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-medium text-slate2 outline-none transition-colors duration-150; }
   .sublink:hover, .sublink:focus-visible { @apply bg-mist text-brand; }
@@ -84,9 +93,10 @@ tailwind.config = {
   details.faq summary { @apply flex cursor-pointer list-none items-baseline justify-between gap-6 py-6 outline-none; }
   details.faq summary::-webkit-details-marker { display: none; }
   details.faq summary h3 { @apply font-display text-xl md:text-2xl font-semibold tracking-tight transition-colors duration-200; }
-  details.faq summary:hover h3, details.faq summary:focus-visible h3 { @apply text-brand; }
+  details.faq summary:focus-visible h3 { @apply text-brand; }
+  @media (hover: hover) and (pointer: fine) { details.faq summary:hover h3 { @apply text-brand; } }
   details.faq summary:focus-visible { outline: 2px solid #1B6FB3; outline-offset: 4px; border-radius: 4px; }
-  details.faq .faq-icon { @apply relative mt-1 h-6 w-6 shrink-0 rounded-full ring-1 ring-brand/30 text-brand transition-transform duration-300; }
+  details.faq .faq-icon { @apply relative mt-1 h-6 w-6 shrink-0 rounded-full ring-1 ring-brand/30 text-brand transition-transform duration-200 ease-[cubic-bezier(.23,1,.32,1)]; }
   details.faq .faq-icon::before, details.faq .faq-icon::after { content:""; position:absolute; left:50%; top:50%; background: currentColor; transition: transform .3s; }
   details.faq .faq-icon::before { width:10px; height:2px; transform: translate(-50%,-50%); }
   details.faq .faq-icon::after { width:2px; height:10px; transform: translate(-50%,-50%); }
@@ -222,7 +232,7 @@ tailwind.config = {
         <div class="reveal mt-9" style="transition-delay:.16s"><a href="#surgery-information" class="btn-primary uppercase tracking-[0.12em]">The Surgeries We Perform
           <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v9m0 0 3.5-3.5M8 12 4.5 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
         <div class="reveal mt-14 rounded-3xl bg-mist/70 p-8 ring-1 ring-tint" style="transition-delay:.2s">
-          <img src="resources/site-images/nds-logo-and-certificate-684---527-px.png" alt="certified day stay surgery and procedures" loading="lazy" class="mx-auto w-full max-w-md">
+          <img src="resources/site-images/daa-certified-day-stay-nzs-8164.png" alt="Certified by DAA Group: Day-Stay Surgery and Procedures, NZS 8164" width="709" height="709" loading="lazy" class="mx-auto w-full max-w-[19rem] rounded-full">
         </div>
       </div>
       <div class="space-y-8">
