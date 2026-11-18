@@ -1,0 +1,22 @@
+// Rasterise the map HTML: node render.mjs <html> <out.png> <dpr>
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+import { pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
+const require = createRequire(path.resolve('package.json'));
+const puppeteer = require('puppeteer-core');
+const [html, out, dpr = '1'] = process.argv.slice(2);
+const shellRoot = path.join(os.homedir(), '.cache/puppeteer/chrome-headless-shell');
+const v = fs.readdirSync(shellRoot).sort((a, b) => b.localeCompare(a, undefined, { numeric: true }))[0];
+const dir = path.join(shellRoot, v);
+const bin = fs.readdirSync(dir, { recursive: true }).map(String).find(f => f.endsWith('/chrome-headless-shell'));
+const browser = await puppeteer.launch({ executablePath: path.join(dir, bin), headless: true });
+const page = await browser.newPage();
+await page.setViewport({ width: 1253, height: 810, deviceScaleFactor: Number(dpr) });
+await page.goto(pathToFileURL(html).href, { waitUntil: 'networkidle0' });
+await page.evaluate(() => document.fonts.ready);
+const el = await page.$('#map');
+await el.screenshot({ path: out });
+await browser.close();
+console.log(out);

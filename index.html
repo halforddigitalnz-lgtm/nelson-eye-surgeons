@@ -68,14 +68,55 @@ tailwind.config = {
 
   .navlink { @apply relative font-body text-[13px] font-semibold uppercase tracking-[0.12em] text-ink/80 py-2 outline-none transition-colors duration-200; }
   .navlink:hover, .navlink:focus-visible { @apply text-brand; }
-  .navlink::after { content:""; @apply absolute left-0 -bottom-0.5 h-[2px] w-full bg-brand origin-left transition-transform duration-200 ease-[cubic-bezier(.23,1,.32,1)]; transform: scaleX(0); }
-  .navlink:hover::after, .navlink:focus-visible::after, .navlink[aria-current="page"]::after { transform: scaleX(1); }
+  .navlink::after { content:""; @apply absolute left-0 -bottom-0.5 h-[2px] w-full bg-brand origin-right transition-transform duration-200 ease-[cubic-bezier(.23,1,.32,1)]; transform: scaleX(0); }
+  .navlink:hover::after, .navlink:focus-visible::after, .navlink[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
   .navlink[aria-current="page"] { @apply text-brand; }
 
-  .submenu { @apply invisible opacity-0 translate-y-2 absolute left-1/2 top-full pt-4 z-50 transition-[opacity,transform,visibility] duration-200 ease-[cubic-bezier(.23,1,.32,1)]; transform: translate(-50%, 8px); }
-  .has-sub:hover .submenu, .has-sub:focus-within .submenu { @apply visible opacity-100; transform: translate(-50%, 0); }
-  .sublink { @apply block whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-medium text-slate2 outline-none transition-colors duration-150; }
+  /* dropdowns grow out of their trigger (origin top-centre) and the items settle in a short cascade.
+     Closing waits 90ms so a diagonal pointer path into the panel doesn't snap it shut; keyboard focus skips the motion. */
+  .submenu { @apply invisible absolute left-1/2 top-full pt-4 z-50; opacity: 0; transform-origin: 50% 0;
+    transform: translate(-50%, -6px) scale(.97);
+    transition: opacity 150ms ease-in 90ms, transform 150ms ease-in 90ms, visibility 0s linear 240ms; }
+  .has-sub:hover .submenu, .has-sub:focus-within .submenu { @apply visible; opacity: 1; transform: translate(-50%, 0) scale(1);
+    transition: opacity 200ms cubic-bezier(.23,1,.32,1), transform 220ms cubic-bezier(.23,1,.32,1), visibility 0s; }
+  .has-sub > .navlink svg { transition: transform 220ms cubic-bezier(.23,1,.32,1); }
+  .has-sub:hover > .navlink svg, .has-sub:focus-within > .navlink svg { transform: rotate(180deg); }
+  .has-sub:hover > .navlink, .has-sub:focus-within > .navlink { @apply text-brand; }
+  .has-sub:hover > .navlink::after, .has-sub:focus-within > .navlink::after { transform: scaleX(1); transform-origin: left; }
+  .sublink { @apply block whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-medium text-slate2 outline-none;
+    opacity: 0; transform: translateY(4px);
+    transition: opacity 0s linear 240ms, transform 0s linear 240ms, background-color 150ms ease, color 150ms ease; }
+  .has-sub:hover .sublink, .has-sub:focus-within .sublink { opacity: 1; transform: none;
+    transition: opacity 200ms cubic-bezier(.23,1,.32,1) var(--sd, 0ms), transform 240ms cubic-bezier(.23,1,.32,1) var(--sd, 0ms), background-color 150ms ease, color 150ms ease; }
+  .submenu .sublink:nth-child(2) { --sd: 30ms; } .submenu .sublink:nth-child(3) { --sd: 60ms; }
+  .submenu .sublink:nth-child(4) { --sd: 90ms; } .submenu .sublink:nth-child(n+5) { --sd: 120ms; }
+  .has-sub:has(:focus-visible) .submenu, .has-sub:has(:focus-visible) .sublink { transition-duration: 0s; transition-delay: 0s; }
   .sublink:hover, .sublink:focus-visible { @apply bg-mist text-brand; }
+
+  /* mobile menu: a sheet that drops from under the bar, rows settling in sequence; the icon morphs to a close mark */
+  #mobileNav { position: absolute; inset-inline: 0; top: 100%; max-height: calc(100dvh - 76px); overflow-y: auto; overscroll-behavior: contain;
+    visibility: hidden; opacity: 0; transform: translateY(-8px); box-shadow: 0 2px 4px rgba(10,37,64,.06), 0 24px 40px -20px rgba(10,37,64,.30);
+    transition: opacity 160ms ease-in, transform 160ms ease-in, visibility 0s linear 160ms; }
+  #mobileNav.is-open { visibility: visible; opacity: 1; transform: none;
+    transition: opacity 220ms cubic-bezier(.23,1,.32,1), transform 260ms cubic-bezier(.23,1,.32,1), visibility 0s; }
+  #mobileNav > :not(.btn-primary) { opacity: 0; transform: translateY(-6px); transition: opacity 0s linear 160ms, transform 0s linear 160ms; }
+  #mobileNav.is-open > :not(.btn-primary) { opacity: 1; transform: none;
+    transition: opacity 240ms cubic-bezier(.23,1,.32,1) var(--md, 0ms), transform 280ms cubic-bezier(.23,1,.32,1) var(--md, 0ms); }
+  #mobileNav > .btn-primary { opacity: 0; transition: opacity 0s linear 160ms, transform 160ms cubic-bezier(.23,1,.32,1), background-color 200ms ease; }
+  #mobileNav.is-open > .btn-primary { opacity: 1; transition: opacity 260ms cubic-bezier(.23,1,.32,1) 190ms, transform 160ms cubic-bezier(.23,1,.32,1), background-color 200ms ease; }
+  #mobileNav > :nth-child(2) { --md: 40ms; } #mobileNav > :nth-child(3) { --md: 75ms; } #mobileNav > :nth-child(4) { --md: 110ms; }
+  #mobileNav > :nth-child(5) { --md: 145ms; } #mobileNav > :nth-child(n+6) { --md: 180ms; }
+  #mobileNav details > summary svg { transition: transform 220ms cubic-bezier(.23,1,.32,1); }
+  #mobileNav details[open] > summary svg { transform: rotate(180deg); }
+  #mobileNav details[open] > div { animation: mnavIn 240ms cubic-bezier(.23,1,.32,1) both; }
+  @keyframes mnavIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  #menuBtn { transition: transform 160ms cubic-bezier(.23,1,.32,1), background-color 150ms ease; }
+  #menuBtn:active { transform: scale(.94); }
+  @media (hover: hover) and (pointer: fine) { #menuBtn:hover { background-color: #EEF3F8; } }
+  #menuBtn path { transform-box: fill-box; transform-origin: center; transition: transform 300ms cubic-bezier(.77,0,.175,1), opacity 160ms ease; }
+  #menuBtn[aria-expanded="true"] .mi-top { transform: translateY(5px) rotate(45deg); }
+  #menuBtn[aria-expanded="true"] .mi-mid { opacity: 0; transform: scaleX(.2); }
+  #menuBtn[aria-expanded="true"] .mi-bot { transform: translateY(-5px) rotate(-45deg); }
 
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
   .reveal.in { opacity: 1; transform: none; }
@@ -107,20 +148,23 @@ tailwind.config = {
      so the pointer never leaves the link mid-hover (which caused a flicker loop) */
   .surgery-card { @apply relative block rounded-2xl outline-none; }
   .surgery-card:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 4px; }
-  .surgery-card .sc-inner { @apply relative isolate flex min-h-[13.5rem] flex-col overflow-hidden rounded-2xl bg-white p-6 text-left shadow-lift transition-[transform,box-shadow] duration-[260ms] ease-[cubic-bezier(.23,1,.32,1)] h-full; transform: translateZ(0); backface-visibility: hidden; }
+  .surgery-card .sc-inner { @apply relative isolate flex min-h-[12rem] flex-col overflow-hidden rounded-2xl bg-white p-6 text-left shadow-lift transition-[transform,box-shadow] duration-[260ms] ease-[cubic-bezier(.23,1,.32,1)] h-full; transform: translateZ(0); backface-visibility: hidden; }
   .surgery-card .sc-inner::before { content:""; position:absolute; inset:0; z-index:-1; opacity:0; transition: opacity .35s cubic-bezier(.22,1,.36,1);
     background: radial-gradient(120% 90% at 100% 0%, #2A86D0 0%, #1B6FB3 45%, #0F4C85 100%); }
-  .surgery-card .sc-inner::after { content:""; position:absolute; left:0; right:0; top:0; height:4px; background: linear-gradient(90deg,#1B6FB3,#7FB9E0); transition: opacity .35s; }
   .surgery-card:focus-visible .sc-inner { transform: translateY(-6px) translateZ(0); box-shadow: 0 4px 8px rgba(6,24,43,.25), 0 28px 56px -16px rgba(27,111,179,.6); }
   .surgery-card:focus-visible .sc-inner::before { opacity:1; }
-  .surgery-card:focus-visible .sc-inner::after { opacity:0; }
   .surgery-card:active .sc-inner { transform: translateY(-2px) scale(.985) translateZ(0); }
-  .surgery-card .sc-icon { @apply grid h-12 w-12 place-items-center rounded-xl bg-mist text-brand transition-colors duration-300; }
-  .surgery-card .sc-icon svg { transform: translateZ(0); backface-visibility: hidden; }
-  .surgery-card .sc-label { @apply mt-5 font-display text-xl font-bold leading-[1.2] tracking-[-0.015em] text-ink transition-colors duration-300 md:text-[1.35rem]; }
-  .surgery-card .sc-desc { @apply mt-2 text-[15px] leading-[1.55] text-slate2 transition-colors duration-300; }
+  /* the NES eye leads the title on its first line. It shares the title's font-size so em maths line up:
+     1.45em tall, pulled up .125em so its centre sits on the capitals' centre (Urbanist baseline .95em, cap .7em).
+     A tinted drop-shadow follows the alpha, so the white eyeball reads as a sphere on the white card. */
+  .surgery-card .sc-head { @apply flex items-start gap-3; }
+  .surgery-card .sc-mark { @apply text-xl md:text-[1.35rem]; flex: none; height: 1.45em; width: 1.45em; margin-top: -.125em;
+    filter: drop-shadow(0 1px 1.5px rgba(10,37,64,.16)) drop-shadow(0 4px 10px rgba(27,111,179,.16));
+    transition: transform 320ms cubic-bezier(.23,1,.32,1); }
+  .surgery-card .sc-label { @apply font-display text-xl font-bold leading-[1.2] tracking-[-0.015em] text-ink transition-colors duration-300 md:text-[1.35rem]; }
+  .surgery-card .sc-desc { @apply mt-3.5 block text-[15px] leading-[1.55] text-slate2 transition-colors duration-300; }
+  .surgery-card:focus-visible .sc-mark { transform: rotate(-12deg); }
   .surgery-card .sc-arrow { @apply mt-auto grid h-9 w-9 shrink-0 place-items-center self-end rounded-full bg-brand text-white transition-[transform,background-color,color] duration-300; }
-  .surgery-card:focus-visible .sc-icon { @apply text-white; background-color: rgba(255,255,255,.16); }
   .surgery-card:focus-visible .sc-label { @apply text-white; }
   .surgery-card:focus-visible .sc-desc { @apply text-crest; }
   .surgery-card:focus-visible .sc-arrow { transform: translateX(4px); @apply bg-white text-brand; }
@@ -128,8 +172,7 @@ tailwind.config = {
   @media (hover: hover) and (pointer: fine) {
     .surgery-card:hover .sc-inner { transform: translateY(-6px) translateZ(0); box-shadow: 0 4px 8px rgba(6,24,43,.25), 0 28px 56px -16px rgba(27,111,179,.6); }
     .surgery-card:hover .sc-inner::before { opacity:1; }
-    .surgery-card:hover .sc-inner::after { opacity:0; }
-    .surgery-card:hover .sc-icon { @apply text-white; background-color: rgba(255,255,255,.16); }
+    .surgery-card:hover .sc-mark { transform: rotate(-12deg); }
     .surgery-card:hover .sc-label { @apply text-white; }
     .surgery-card:hover .sc-desc { @apply text-crest; }
     .surgery-card:hover .sc-arrow { transform: translateX(4px); @apply bg-white text-brand; }
@@ -154,6 +197,7 @@ tailwind.config = {
   .focus-in { animation: focusIn 1s cubic-bezier(.25,.6,.25,1) backwards; }
 
   @media (prefers-reduced-motion: reduce) {
+    .submenu, .sublink, #mobileNav, #mobileNav > * { transition-delay: 0s !important; }
     .reveal { opacity: 1 !important; transform: none !important; transition: none; }
     .blur-in, .focus-in { animation: none; filter: none; opacity: 1; }
     html { scroll-behavior: auto; }
@@ -178,7 +222,7 @@ tailwind.config = {
         </a>
         <div class="submenu">
           <div class="rounded-2xl border border-tint bg-white p-2 shadow-lift">
-            <a href="dr-antony-suter.html" class="sublink">Dr Antony Suter</a><a href="dr-rob-jones.html" class="sublink">Dr Rob Jones</a><a href="fiona-suter.html" class="sublink">Fiona Suter</a><a href="mary-jane-mij-mcphie.html" class="sublink">Mary-Jane (Mij) McPhie</a>
+            <a href="dr-antony-suter.html" class="sublink">Dr Antony Suter</a><a href="dr-rob-jones.html" class="sublink">Dr Rob Jones</a><a href="fiona-suter.html" class="sublink">Fiona Suter</a>
           </div>
         </div>
       </div>
@@ -206,10 +250,10 @@ tailwind.config = {
       <a href="contact.html" class="btn-primary !px-6 !py-2.5 text-[13px] uppercase tracking-[0.1em]">Contact</a>
     </nav>
     <button id="menuBtn" class="rounded-lg p-2 text-ink outline-none ring-brand focus-visible:ring-2 lg:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
-      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="mi-open" d="M4 7h16M4 12h16M4 17h16"/><path class="mi-close hidden" d="M6 6l12 12M18 6L6 18"/></svg>
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="mi-top" d="M4 7h16"/><path class="mi-mid" d="M4 12h16"/><path class="mi-bot" d="M4 17h16"/></svg>
     </button>
   </div>
-  <nav id="mobileNav" class="hidden border-t border-tint bg-paper px-5 pb-8 pt-4 lg:hidden" aria-label="Mobile">
+  <nav id="mobileNav" class="border-t border-tint bg-paper px-5 pb-8 pt-4 lg:hidden" aria-label="Mobile">
     
     <a href="index.html" class="block border-b border-tint py-4 text-[13px] font-semibold uppercase tracking-[0.12em] text-ink">Home</a>
     <details class="border-b border-tint">
@@ -218,7 +262,7 @@ tailwind.config = {
       </summary>
       <div class="pb-4 pl-4">
         <a href="our-team.html" class="block py-2 text-sm font-semibold text-brand">Our Team — overview</a>
-        <a href="dr-antony-suter.html" class="block py-2 text-sm text-slate2">Dr Antony Suter</a><a href="dr-rob-jones.html" class="block py-2 text-sm text-slate2">Dr Rob Jones</a><a href="fiona-suter.html" class="block py-2 text-sm text-slate2">Fiona Suter</a><a href="mary-jane-mij-mcphie.html" class="block py-2 text-sm text-slate2">Mary-Jane (Mij) McPhie</a>
+        <a href="dr-antony-suter.html" class="block py-2 text-sm text-slate2">Dr Antony Suter</a><a href="dr-rob-jones.html" class="block py-2 text-sm text-slate2">Dr Rob Jones</a><a href="fiona-suter.html" class="block py-2 text-sm text-slate2">Fiona Suter</a>
       </div>
     </details>
     <details class="border-b border-tint">
@@ -260,32 +304,40 @@ tailwind.config = {
       <div class="mt-6 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
         <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group" style="animation-delay:.55s">
           <span class="sc-inner">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0Z"/><circle cx="12" cy="12" r="3.25"/><path d="M13.6 10.4a2.3 2.3 0 0 1 .6 1.6" opacity=".6"/></svg></span>
-          <span class="sc-label">Cataract Surgery</span>
+          <span class="sc-head">
+            <img src="resources/brand%20assets/logo/logo-mark-on-dark.png" alt="" aria-hidden="true" class="sc-mark" width="256" height="256">
+            <span class="sc-label">Cataract Surgery</span>
+          </span>
           <span class="sc-desc">Clear vision restored when the eye&rsquo;s natural lens clouds over.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </a>
         <a href="cataract-and-refractive-lens-exchange.html" class="surgery-card focus-in group" style="animation-delay:.63s">
           <span class="sc-inner">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/><circle cx="12" cy="12" r="2.6"/></svg></span>
-          <span class="sc-label">Refractive Lens Exchange</span>
+          <span class="sc-head">
+            <img src="resources/brand%20assets/logo/logo-mark-on-dark.png" alt="" aria-hidden="true" class="sc-mark" width="256" height="256">
+            <span class="sc-label">Refractive Lens Exchange</span>
+          </span>
           <span class="sc-desc">Lens replacement to reduce your dependence on glasses.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </a>
         <a href="services.html#surgery-information" class="surgery-card focus-in group" style="animation-delay:.71s">
           <span class="sc-inner">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13c2.2-4.6 5.4-7 9-7s6.8 2.4 9 7"/><path d="M12 6V3.5M6.4 7.6 4.9 5.9M17.6 7.6l1.5-1.7"/><path d="M6.5 16.5c1.6 1.4 3.5 2.1 5.5 2.1s3.9-.7 5.5-2.1" opacity=".55"/></svg></span>
-          <span class="sc-label">Oculoplastic, Glaucoma &amp; other surgeries</span>
+          <span class="sc-head">
+            <img src="resources/brand%20assets/logo/logo-mark-on-dark.png" alt="" aria-hidden="true" class="sc-mark" width="256" height="256">
+            <span class="sc-label">Oculoplastic, Glaucoma &amp; other surgeries</span>
+          </span>
           <span class="sc-desc">Eyelid, tear-duct, pterygium and pressure-lowering procedures.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </a>
         <a href="laser-eye-surgery.html" class="surgery-card focus-in group" style="animation-delay:.79s">
           <span class="sc-inner">
-          <span class="sc-icon" aria-hidden="true"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M5.06 12.33a1 1 0 0 1 0-.66 7.5 7.5 0 0 1 13.88 0 1 1 0 0 1 0 .66 7.5 7.5 0 0 1-13.88 0Z"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span>
-          <span class="sc-label">Laser Vision Correction</span>
+          <span class="sc-head">
+            <img src="resources/brand%20assets/logo/logo-mark-on-dark.png" alt="" aria-hidden="true" class="sc-mark" width="256" height="256">
+            <span class="sc-label">Laser Vision Correction</span>
+          </span>
           <span class="sc-desc">Assessed here in Nelson, in partnership with a leading laser surgeon.</span>
           <span class="sc-arrow" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
@@ -301,7 +353,7 @@ tailwind.config = {
       <p class="eyebrow reveal">Local, Independent Eye Care</p>
       <h2 class="reveal mt-4 font-display text-3xl font-semibold tracking-[-0.03em] md:text-[2.6rem] md:leading-[1.15]" style="transition-delay:.08s">Based in Nelson. Here before, during, and after&nbsp;surgery.</h2>
       <figure class="photo reveal mt-10 aspect-[4/3] rounded-3xl shadow-lift" style="transition-delay:.16s">
-        <img src="resources/site-images/f77a1473--002.jpg" alt="The Nelson Eye Surgeons team" loading="lazy">
+        <img src="resources/site-images/rob-antony-2026.jpg" alt="Dr Antony Suter and Dr Rob Jones" loading="lazy" width="1600" height="1200">
         <span class="tintlayer" aria-hidden="true"></span>
       </figure>
     </div>
@@ -309,7 +361,7 @@ tailwind.config = {
       <p class="prose-p reveal text-lg" style="transition-delay:.14s">We are a locally based, friendly and professional team of highly experienced, internationally trained surgeons, nurses, ophthalmic technicians and optometrists providing independent surgical and medical eye care to the top of the South Island including Nelson, Richmond, Motueka, Golden Bay and Marlborough.</p>
       <p class="prose-p reveal mt-5 text-lg" style="transition-delay:.2s">NELSON EYE SURGEONS believe that exceptional surgical outcomes rely on continuity of care, timely follow-up, and long-term local support - not simply a procedure. Because we are based in Nelson, we are uniquely positioned to provide comprehensive ophthalmic care within the community, before, during, and after surgery.</p>
       <div class="reveal mt-9 flex flex-wrap gap-3" style="transition-delay:.26s">
-        <a href="our-team.html" class="btn-ghost">Our Specialists
+        <a href="our-team.html" class="btn-ghost">Our Team
           <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href="services.html" class="btn-ghost">Our Services
           <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9m0 0L8.5 4.5M12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -327,7 +379,7 @@ tailwind.config = {
     <div class="grid gap-12 md:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
       <div>
         <div class="flex items-center gap-4">
-          <img src="resources/brand%20assets/logo/logo-mark-white.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
+          <img src="resources/brand%20assets/logo/logo-mark-on-dark.png" alt="" aria-hidden="true" class="h-[3.25rem] w-[3.25rem] shrink-0">
           <p class="font-display text-white">
             <span class="block text-sm font-normal tracking-[0.42em]">NELSON</span>
             <span class="mt-0.5 block text-[1.35rem] font-bold tracking-[0.04em]">EYE SURGEONS</span>
@@ -360,7 +412,7 @@ tailwind.config = {
     <div class="mt-14 flex flex-col gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
       <p class="text-xs text-crest/50">© Copyright 2026 NELSON EYE SURGEONS.</p>
       <a href="contact.html" class="group inline-flex items-center gap-3 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-sky2">
-        <img src="resources/brand%20assets/logo/logo-mark-white.png" alt="" aria-hidden="true" class="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:-rotate-12">
+        <img src="resources/brand%20assets/logo/logo-mark-on-dark.png" alt="" aria-hidden="true" class="h-7 w-7 shrink-0 transition-transform duration-300 group-hover:-rotate-12">
         <span class="text-sm text-crest/70 transition-colors duration-150 group-hover:text-white group-focus-visible:text-white">See what you've been missing. <span class="font-semibold text-white underline decoration-sky2/60 decoration-2 underline-offset-4 transition-colors duration-150 group-hover:decoration-white">Book an appointment</span></span>
       </a>
     </div>
@@ -377,14 +429,16 @@ tailwind.config = {
                         hdr.classList.toggle('border-tint', window.scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  // mobile menu
+  // mobile menu: the class drives the CSS transitions; Escape or a tap outside the header closes it
   const btn = document.getElementById('menuBtn'), nav = document.getElementById('mobileNav');
-  btn?.addEventListener('click', () => {
-    const open = nav.classList.toggle('hidden') === false;
+  const setMenu = open => {
+    nav.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', open);
-    btn.querySelector('.mi-open').classList.toggle('hidden', open);
-    btn.querySelector('.mi-close').classList.toggle('hidden', !open);
-  });
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  btn?.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav?.classList.contains('is-open')) { setMenu(false); btn.focus(); } });
+  document.addEventListener('click', e => { if (nav?.classList.contains('is-open') && !hdr.contains(e.target)) setMenu(false); });
 
   // scroll reveal
   const io = new IntersectionObserver(es => es.forEach(e => {
