@@ -27,7 +27,8 @@ http.createServer((req, res) => {
   try {
     let urlPath = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     if (urlPath.endsWith('/')) urlPath += 'index.html';
-    const filePath = path.join(root, urlPath);
+    let filePath = path.join(root, urlPath);
+    if (!path.extname(filePath) && fs.existsSync(filePath + '.html')) filePath += '.html'; // clean URLs, as on Vercel
     if (!filePath.startsWith(root)) { res.writeHead(403); return res.end('Forbidden'); }
     if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
       res.writeHead(404); return res.end('Not found: ' + urlPath);
