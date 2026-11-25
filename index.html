@@ -172,6 +172,15 @@ tailwind.config = {
   .surgery-card .sc-label { @apply font-display text-xl font-bold leading-[1.2] tracking-[-0.015em] text-ink transition-colors duration-300 md:text-[1.35rem]; }
   .surgery-card .sc-desc { @apply mt-3.5 block text-[15px] leading-[1.55] text-slate2 transition-colors duration-300; }
   .surgery-card:focus-visible .sc-mark { transform: rotate(-12deg); }
+  /* phones: a compact row — title and line of text on the left, arrow centred on the right */
+  @media (max-width: 639px) {
+    a.surgery-card .sc-inner { display: grid; grid-template-columns: minmax(0,1fr) auto; column-gap: 1rem; align-items: center; min-height: 0; padding: 1rem 1rem 1rem 1.125rem; }
+    a.surgery-card .sc-head { grid-column: 1; gap: .625rem; }
+    a.surgery-card .sc-mark, .surgery-card .sc-label { font-size: 1.0625rem; }
+    a.surgery-card .sc-mark { height: 1.3em; width: 1.3em; margin-top: -.05em; }
+    a.surgery-card .sc-desc { grid-column: 1; margin-top: .375rem; font-size: .875rem; line-height: 1.5; }
+    a.surgery-card .sc-arrow { grid-column: 2; grid-row: 1 / span 2; margin: 0; align-self: center; height: 2rem; width: 2rem; }
+  }
   .surgery-card .sc-arrow { @apply mt-auto grid h-9 w-9 shrink-0 place-items-center self-end rounded-full bg-brand text-white transition-[transform,background-color,color] duration-300; }
   .surgery-card:focus-visible .sc-label { @apply text-white; }
   .surgery-card:focus-visible .sc-desc { @apply text-crest; }
@@ -309,7 +318,7 @@ tailwind.config = {
 
     <nav class="mt-16 md:mt-20" aria-labelledby="surgeries-label">
       <p id="surgeries-label" class="focus-in text-[11px] font-semibold uppercase tracking-[0.18em] text-sky2/80" style="animation-delay:.5s">Considering eye surgery? Start here</p>
-      <div class="mt-6 grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
+      <div class="mt-6 grid gap-2.5 text-left sm:grid-cols-2 sm:gap-4 lg:grid-cols-4 md:gap-5">
         <a href="cataract-and-refractive-lens-exchange" class="surgery-card focus-in group" style="animation-delay:.55s">
           <span class="sc-inner">
           <span class="sc-head">
